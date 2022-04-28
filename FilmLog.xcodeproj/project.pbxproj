@@ -19,6 +19,7 @@
 		C743C67A28199F6F00B6215F /* MainCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743C67928199F6F00B6215F /* MainCardView.swift */; };
 		C743C6822819BBEF00B6215F /* GenreScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743C6812819BBEF00B6215F /* GenreScrollView.swift */; };
 		C743C6882819C79400B6215F /* AddFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743C6872819C79400B6215F /* AddFilmView.swift */; };
+		C7EAA2CD281AD6E70024B05E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		C743C67928199F6F00B6215F /* MainCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCardView.swift; sourceTree = "<group>"; };
 		C743C6812819BBEF00B6215F /* GenreScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreScrollView.swift; sourceTree = "<group>"; };
 		C743C6872819C79400B6215F /* AddFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilmView.swift; sourceTree = "<group>"; };
+		C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				C743C28B281973D300B6215F /* Assets.xcassets */,
 				C743C66B28197D8800B6215F /* Font */,
 				C743C28D281973D300B6215F /* Preview Content */,
+				C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */,
 			);
 			path = FilmLog;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 				C743C6882819C79400B6215F /* AddFilmView.swift in Sources */,
 				C743C67A28199F6F00B6215F /* MainCardView.swift in Sources */,
 				C743C67628197EF400B6215F /* FontManager.swift in Sources */,
+				C7EAA2CD281AD6E70024B05E /* ImagePicker.swift in Sources */,
 				C743C678281990D200B6215F /* MainView.swift in Sources */,
 				C743C288281973D000B6215F /* FilmLogApp.swift in Sources */,
 				C743C6822819BBEF00B6215F /* GenreScrollView.swift in Sources */,

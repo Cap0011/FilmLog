@@ -11,6 +11,10 @@ struct AddFilmView: View {
     
     @Binding var isShowingSheet: Bool
     
+    @State private var imagePickerPresented = false
+    @State private var selectedImage: UIImage?
+    @State private var filmImage: Image?
+    
     @State private var title: String = ""
     @State private var review: String = ""
     
@@ -20,17 +24,28 @@ struct AddFilmView: View {
                 Color("LightBlue").ignoresSafeArea()
                 VStack {
                     ZStack {
-                        RoundedRectangle(cornerRadius: 8)
+                        let image = filmImage ?? Image("White")
+                        image
+                            .resizable()
+                            .scaledToFit()
                             .frame(width: 178, height: 266)
-                            .foregroundColor(.white)
+                            .cornerRadius(8)
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 32))
                             .foregroundColor(Color("Red"))
                     }
                     .padding(.bottom, 15)
+                    .onTapGesture {
+                        imagePickerPresented.toggle()
+                    }
+                    .sheet(isPresented: $imagePickerPresented,
+                           onDismiss: loadImage,
+                           content: { ImagePicker(image: $selectedImage) })
+                    
                     GenreScrollView()
                         .padding(.horizontal, 26)
                         .padding(.bottom, 15)
+                    
                     TextField(
                             "FILM TITLE",
                             text: $title
@@ -82,5 +97,10 @@ struct AddFilmView: View {
             })
         }
 
+    }
+    
+    private func loadImage() {
+        guard let selectedImage = selectedImage else { return }
+        filmImage = Image(uiImage: selectedImage)
     }
 }
