@@ -6,17 +6,21 @@
 //
 
 import SwiftUI
+import AlertToast
 
 struct AddFilmView: View {
     
     @Binding var isShowingSheet: Bool
+    @State private var showErrorToast = false
     
     @State private var imagePickerPresented = false
     @State private var selectedImage: UIImage?
-    @State private var filmImage: Image?
     
+    @State private var filmImage: Image?
+    @State private var genre: Int?
     @State private var title: String = ""
     @State private var review: String = ""
+    @State private var recommend: Bool = true
     
     var body: some View {
         NavigationView {
@@ -42,7 +46,7 @@ struct AddFilmView: View {
                            onDismiss: loadImage,
                            content: { ImagePicker(image: $selectedImage) })
                     
-                    GenreScrollView()
+                    GenreScrollView(selected: $genre)
                         .padding(.horizontal, 26)
                         .padding(.bottom, 15)
                     
@@ -69,17 +73,29 @@ struct AddFilmView: View {
 
                     HStack(spacing: 50) {
                         Image(systemName: "hand.thumbsup.circle")
-                            .foregroundColor(Color("LightGrey"))
+                            .foregroundColor(recommend ? Color("Red") : Color("LightGrey"))
                             .font(.system(size: 60))
+                            .onTapGesture {
+                                recommend = true
+                            }
                         Image(systemName: "hand.thumbsdown.circle")
-                            .foregroundColor(Color("LightGrey"))
+                            .foregroundColor(recommend ? Color("LightGrey") : Color("Red"))
                             .font(.system(size: 60))
+                            .onTapGesture {
+                                recommend = false
+                            }
                     }
                     .padding(.bottom, 40)
 
                     Button(action: {
-                        //Save
-                        self.isShowingSheet = false
+                        //if incomplete -> toast
+                        if filmImage == nil || genre == nil || title == "" {
+                            showErrorToast.toggle()
+                        }
+                        //if complete -> save
+                        else {
+                            self.isShowingSheet = false
+                        }
                         }) {
                             Text("SAVE")
                                 .frame(width: 338, height: 50)
@@ -89,6 +105,9 @@ struct AddFilmView: View {
                     }
                 }
             }
+            .toast(isPresenting: $showErrorToast, alert: {
+                AlertToast(displayMode: .banner(.pop), type: .error(Color("Red")), title: "Please fill in all the required fields.")
+            })
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button(action: {
                 self.isShowingSheet = false

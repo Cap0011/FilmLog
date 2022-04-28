@@ -9,14 +9,16 @@ import SwiftUI
 
 struct MainView: View {
     
-    @State var isShowingSheet = false
+    @State private var isShowingSheet = false
+    
+    @State private var genre: Int?
     
     var body: some View {
         NavigationView {
             ZStack {
                 Color("Blue").ignoresSafeArea()
                     VStack {
-                        GenreScrollView()
+                        GenreScrollView(selected: $genre)
                         .frame(height: 36)
                         .padding(.horizontal, 26)
                         .padding(.top, 20)
