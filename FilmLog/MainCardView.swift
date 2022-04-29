@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct MainCardView: View {
-    var title = "Tenet"
-    var review = "Not time but mind inversion"
-    var recommend = true
-    var img = "Tenet"
+    
+    var film: Film
+    
     var body: some View {
         ZStack {
-            Image(img)
+            Image(uiImage: UIImage(data: film.poster!)!)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 175, height: 263)
                 .cornerRadius(8)
                 .shadow(color: .black.opacity(0.5), radius: 15, x: 0, y: 2)
                 .offset(x: 80)
-            MainTextView(title: title, review: review, recommend: recommend)
+            MainTextView(title: film.title!, review: film.review!, recommend: film.recommend)
                 .offset(x: -80)
         }
         .padding(.vertical, 15)
@@ -31,11 +30,10 @@ struct MainCardView: View {
 
 struct MainTextView: View {
     
-    @State var isShowingActionSheet = false
+    var title: String
+    var review: String
+    var recommend: Bool
     
-    var title = "Tenet"
-    var review = "Not time but mind inversion"
-    var recommend = true
     var body: some View {
         VStack (alignment: .leading) {
             HStack {
@@ -43,9 +41,6 @@ struct MainTextView: View {
                     .foregroundColor(Color("LightGrey"))
                     .font(.system(size: 20))
                     .frame(width: 30, height: 24)
-                    .onTapGesture {
-                        isShowingActionSheet = true
-                    }
                 Spacer()
                 if recommend {
                     Image(systemName: "hand.thumbsup.fill")
@@ -78,22 +73,5 @@ struct MainTextView: View {
         .background(Color.white)
         .cornerRadius(8)
         .shadow(color: .black.opacity(0.5), radius: 10, x: 0, y: 2)
-        .confirmationDialog(title, isPresented: $isShowingActionSheet, titleVisibility: .visible) {
-            Button("Edit", role: .none) {
-                //Edit
-            }
-            Button("Delete", role: .destructive) {
-                //Delete
-            }
-            Button("Cancel", role: .cancel) {
-                isShowingActionSheet = false
-            }
-        }
-    }
-}
-
-struct MainCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainCardView()
     }
 }

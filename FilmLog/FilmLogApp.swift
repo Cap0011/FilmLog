@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct FilmLogApp: App {
+    
+    let persistenceContainer = PersistenceController.shared
+    
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environment(\.managedObjectContext, persistenceContainer.container.viewContext)
         }
     }
 }

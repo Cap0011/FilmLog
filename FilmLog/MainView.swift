@@ -9,7 +9,13 @@ import SwiftUI
 
 struct MainView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: [])
+    private var films: FetchedResults<Film>
+    
     @State private var isShowingSheet = false
+    @State private var isShowingEditSheet = false
+    @State private var isShowingActionSheet = false
     
     @State private var genre: Int?
     
@@ -24,9 +30,26 @@ struct MainView: View {
                         .padding(.top, 20)
                         ScrollView {
                             VStack(spacing: 0) {
-                                MainCardView(title: "Tenet", review: "Not time but mind inversion", recommend: true, img: "Tenet")
-                                MainCardView(title: "The Amazing Spiderman 2", review: "Too many villains", recommend: false, img: "Spiderman")
-                                MainCardView(title: "tick, tick...BOOM!", review: "BOOM!", recommend: true, img: "Tick")
+                                ForEach(films) { film in
+                                    MainCardView(film: film)
+                                        .onTapGesture {
+                                            isShowingActionSheet = true
+                                        }
+                                        .confirmationDialog(film.title!, isPresented: $isShowingActionSheet, titleVisibility: .visible) {
+                                            Button("Edit", role: .none) {
+                                                //Open Edit Sheet
+                                                isShowingEditSheet.toggle()
+                                    
+                                            }
+                                            Button("Delete", role: .destructive) {
+                                                //Delete
+                                                //deleteFilm(offsets: films.indices)
+                                            }
+                                            Button("Cancel", role: .cancel) {
+                                                isShowingActionSheet = false
+                                            }
+                                        }
+                                }
                             }
                         }
                     }
@@ -62,10 +85,23 @@ struct MainView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
     }
-}
-
-struct MainView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
+    
+    private func saveContext() {
+        do {
+            try viewContext.save()
+        } catch {
+            let error = error as NSError
+            fatalError("Unresolved Error: \(error)")
+        }
+    }
+    
+    private func deleteFilm(offsets: IndexSet) {
+        offsets.map { films[$0] }.forEach(viewContext.delete)
+        saveContext()
+    }
+    
+    private func updateFilm(_ film: FetchedResults<Film>.Element) {
+        film.title! += " Done!"
+        saveContext()
     }
 }

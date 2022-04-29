@@ -10,6 +10,10 @@ import AlertToast
 
 struct AddFilmView: View {
     
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: [])
+    private var films: FetchedResults<Film>
+    
     @Binding var isShowingSheet: Bool
     @State private var showErrorToast = false
     
@@ -95,6 +99,7 @@ struct AddFilmView: View {
                         //if complete -> save
                         else {
                             self.isShowingSheet = false
+                            addFilm(title: title, review: review, genre: genre!, recommend: recommend, poster: selectedImage!)
                         }
                         }) {
                             Text("SAVE")
@@ -122,4 +127,26 @@ struct AddFilmView: View {
         guard let selectedImage = selectedImage else { return }
         filmImage = Image(uiImage: selectedImage)
     }
+    
+    private func saveContext() {
+        do {
+            try viewContext.save()
+        } catch {
+            let error = error as NSError
+            fatalError("Unresolved Error: \(error)")
+        }
+    }
+    
+    private func addFilm(title: String, review: String, genre: Int, recommend: Bool, poster: UIImage) {
+        
+        let newFilm = Film(context: viewContext)
+        newFilm.title = title
+        newFilm.recommend = recommend
+        newFilm.review = review
+        newFilm.genre = Int64(genre)
+        newFilm.poster = poster.pngData()
+        
+        saveContext()
+    }
+    
 }
