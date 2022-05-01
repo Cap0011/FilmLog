@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MainCardView: View {
     
-    var film: Film
+    @ObservedObject var film: Film
     
     var body: some View {
         ZStack {

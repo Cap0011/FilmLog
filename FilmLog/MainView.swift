@@ -11,15 +11,19 @@ struct MainView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(sortDescriptors: [])
+    
     private var films: FetchedResults<Film>
+    @State private var selectedFilm: FetchedResults<Film>.Element?
     
     @State private var isShowingSheet = false
     @State private var isShowingEditSheet = false
     @State private var isShowingActionSheet = false
     
     @State private var genre: Int?
+    @State private var idx = 0
     
     var body: some View {
+        
         NavigationView {
             ZStack {
                 Color("Blue").ignoresSafeArea()
@@ -30,20 +34,21 @@ struct MainView: View {
                         .padding(.top, 20)
                         ScrollView {
                             VStack(spacing: 0) {
-                                ForEach(films) { film in
-                                    MainCardView(film: film)
+                                ForEach(self.films.indices, id: \.self) { index in
+                                    MainCardView(film: films[index])
                                         .onTapGesture {
                                             isShowingActionSheet = true
+                                            idx = index
                                         }
-                                        .confirmationDialog(film.title!, isPresented: $isShowingActionSheet, titleVisibility: .visible) {
+                                        .confirmationDialog(films[idx].title!, isPresented: $isShowingActionSheet, titleVisibility: .visible) {
                                             Button("Edit", role: .none) {
                                                 //Open Edit Sheet
                                                 isShowingEditSheet.toggle()
-                                    
+                                                selectedFilm = films[idx]
                                             }
                                             Button("Delete", role: .destructive) {
                                                 //Delete
-                                                //deleteFilm(offsets: films.indices)
+                                                deleteFilm(object: films[idx])
                                             }
                                             Button("Cancel", role: .cancel) {
                                                 isShowingActionSheet = false
@@ -81,6 +86,9 @@ struct MainView: View {
                 .sheet(isPresented: $isShowingSheet) {
                     AddFilmView(isShowingSheet: self.$isShowingSheet)
                 }
+                .sheet(isPresented: $isShowingEditSheet) {
+                    EditFilmView(isShowingSheet: self.$isShowingEditSheet, film: $selectedFilm, idx: idx)
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -95,8 +103,9 @@ struct MainView: View {
         }
     }
     
-    private func deleteFilm(offsets: IndexSet) {
-        offsets.map { films[$0] }.forEach(viewContext.delete)
+    private func deleteFilm(object: FetchedResults<Film>.Element) {
+        idx = 0
+        viewContext.delete(object)
         saveContext()
     }
     

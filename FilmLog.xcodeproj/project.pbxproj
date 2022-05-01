@@ -23,6 +23,7 @@
 		C7EAA2D7281AEE5B0024B05E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C7EAA2D6281AEE5B0024B05E /* AlertToast */; };
 		C7EAA2DA281BAF810024B05E /* FilmList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7EAA2D8281BAF810024B05E /* FilmList.xcdatamodeld */; };
 		C7EAA2DC281BB02F0024B05E /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAA2DB281BB02F0024B05E /* Persistence.swift */; };
+		C7EAA2E0281BE6730024B05E /* EditFilmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAA2DF281BE6730024B05E /* EditFilmView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C7EAA2D9281BAF810024B05E /* FilmList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FilmList.xcdatamodel; sourceTree = "<group>"; };
 		C7EAA2DB281BB02F0024B05E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		C7EAA2DF281BE6730024B05E /* EditFilmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFilmView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				C743C28D281973D300B6215F /* Preview Content */,
 				C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */,
 				C7EAA2DB281BB02F0024B05E /* Persistence.swift */,
+				C7EAA2DF281BE6730024B05E /* EditFilmView.swift */,
 			);
 			path = FilmLog;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 			files = (
 				C7EAA2DC281BB02F0024B05E /* Persistence.swift in Sources */,
 				C743C6882819C79400B6215F /* AddFilmView.swift in Sources */,
+				C7EAA2E0281BE6730024B05E /* EditFilmView.swift in Sources */,
 				C7EAA2DA281BAF810024B05E /* FilmList.xcdatamodeld in Sources */,
 				C743C67A28199F6F00B6215F /* MainCardView.swift in Sources */,
 				C743C67628197EF400B6215F /* FontManager.swift in Sources */,
