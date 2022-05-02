@@ -17,7 +17,7 @@ struct MainCardView: View {
                 let img = Image(uiImage: UIImage(data: film.poster!)!)
                 img
                     .resizable()
-                    .scaledToFit()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 175, height: 263)
                     .cornerRadius(8)
                     .shadow(color: .black.opacity(0.5), radius: 15, x: 0, y: 2)

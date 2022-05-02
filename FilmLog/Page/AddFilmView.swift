@@ -46,9 +46,10 @@ struct AddFilmView: View {
                         let image = filmImage ?? Image("White")
                         image
                             .resizable()
-                            .scaledToFit()
+                            .aspectRatio(contentMode: .fill)
                             .frame(width: 178, height: 266)
                             .cornerRadius(8)
+                            .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2)
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 32))
                             .foregroundColor(Color("Red"))
@@ -73,7 +74,7 @@ struct AddFilmView: View {
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding([.horizontal], 10)
                     .font(.custom(FontManager.Intro.regular, size: 16))
-                    .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white).frame(width: 338, height: 40))
+                    .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white).frame(width: 338, height: 40).shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2))
 
                     TextField(
                             "How did you find the film?",
@@ -83,7 +84,7 @@ struct AddFilmView: View {
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding([.horizontal], 10)
                     .font(.custom(FontManager.Intro.condLight, size: 16))
-                    .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white).frame(width: 338, height: 80))
+                    .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white).frame(width: 338, height: 80).shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2))
                     .padding(.vertical, 10)
 
                     HStack(spacing: 50) {
@@ -119,6 +120,7 @@ struct AddFilmView: View {
                                 .foregroundColor(.white)
                                 .background(RoundedRectangle(cornerRadius: 25).foregroundColor(Color("Red")))
                     }
+                        .shadow(color: .black.opacity(0.22), radius: 15, x: 0, y: 2)
                 }
             }
             .toast(isPresenting: $showErrorToast, alert: {

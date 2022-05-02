@@ -21,7 +21,7 @@ struct GenreScrollView: View {
                         //unselected
                         ZStack {
                             RoundedRectangle(cornerRadius: 18)
-                                .stroke(Color("LightRed"), lineWidth: 2)
+                                .stroke(Color("LightRed"), lineWidth: 1)
                                 .frame(width: 70, height: 32)
                             Text(genres[i])
                                 .font(.custom(FontManager.Intro.condBold, size: 14))
@@ -29,7 +29,9 @@ struct GenreScrollView: View {
                         }
                         .frame(minWidth: 74, minHeight: 36)
                         .onTapGesture {
-                            selected = i
+                            withAnimation {
+                                selected = i
+                            }
                         }
                     } else {
                         //selected
@@ -43,7 +45,9 @@ struct GenreScrollView: View {
                                 
                         }
                         .onTapGesture {
-                            selected = 0
+                            withAnimation {
+                                selected = 0
+                            }
                         }
                     }
                 }
