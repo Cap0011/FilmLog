@@ -11,8 +11,6 @@ import AlertToast
 struct EditFilmView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(sortDescriptors: [])
-    private var films: FetchedResults<Film>
     
     @Binding var isShowingSheet: Bool
     @State private var showErrorToast = false
@@ -21,15 +19,26 @@ struct EditFilmView: View {
     @State private var selectedImage: UIImage?
     
     @State private var filmImage: Image?
-    @State private var genre: Int?
+    @State private var genre: Int = 0
     @State private var title: String = ""
     @State private var review: String = ""
     @State private var recommend: Bool = true
     
     @Binding var film: FetchedResults<Film>.Element?
     
-    var idx: Int
-    
+    let genres: [String] = [
+        "Thriller",
+        "Sci-fi",
+        "Action",
+        "Drama",
+        "Comedy",
+        "Horror",
+        "Romance",
+        "Musical",
+        "Fantasy",
+        "History"
+    ]
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -54,7 +63,7 @@ struct EditFilmView: View {
                            onDismiss: loadImage,
                            content: { ImagePicker(image: $selectedImage) })
                     
-                    GenreScrollView(selected: $genre)
+                    GenreScrollView(selected: $genre, genres: genres)
                         .padding(.horizontal, 26)
                         .padding(.bottom, 15)
                     
@@ -97,13 +106,13 @@ struct EditFilmView: View {
 
                     Button(action: {
                         //if incomplete -> toast
-                        if selectedImage == nil || genre == nil || title == "" {
+                        if selectedImage == nil || title == "" {
                             showErrorToast.toggle()
                         }
                         //if complete -> edit
                         else {
                             self.isShowingSheet = false
-                            editFilm(title: title, review: review, genre: genre!, recommend: recommend, poster: selectedImage!)
+                            editFilm(title: title, review: review, genre: genre, recommend: recommend, poster: selectedImage!)
                         }
                         }) {
                             Text("Done")
@@ -150,11 +159,11 @@ struct EditFilmView: View {
     
     private func editFilm(title: String, review: String, genre: Int, recommend: Bool, poster: UIImage) {
         
-        films[idx].title = title
-        films[idx].recommend = recommend
-        films[idx].review = review
-        films[idx].genre = Int64(genre)
-        films[idx].poster = poster.pngData()
+        film!.title = title
+        film!.recommend = recommend
+        film!.review = review
+        film!.genre = Int64(genre)
+        film!.poster = poster.pngData()
         
         saveContext()
     }

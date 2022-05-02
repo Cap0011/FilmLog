@@ -7,22 +7,11 @@
 
 import SwiftUI
 
-private let genres: [String] = [
-    "Thriller",
-    "Sci-fi",
-    "Action",
-    "Drama",
-    "Comedy",
-    "Horror",
-    "Romance",
-    "Musical",
-    "Fantasy",
-    "History"
-]
-
 struct GenreScrollView: View {
     
-    @Binding var selected: Int?
+    @Binding var selected: Int
+    
+    var genres: [String]
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -54,7 +43,7 @@ struct GenreScrollView: View {
                                 
                         }
                         .onTapGesture {
-                            selected = nil
+                            selected = 0
                         }
                     }
                 }

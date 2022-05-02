@@ -11,8 +11,6 @@ import AlertToast
 struct AddFilmView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(sortDescriptors: [])
-    private var films: FetchedResults<Film>
     
     @Binding var isShowingSheet: Bool
     @State private var showErrorToast = false
@@ -21,10 +19,23 @@ struct AddFilmView: View {
     @State private var selectedImage: UIImage?
     
     @State private var filmImage: Image?
-    @State private var genre: Int?
+    @State private var genre: Int = 0
     @State private var title: String = ""
     @State private var review: String = ""
     @State private var recommend: Bool = true
+    
+    let genres: [String] = [
+        "Thriller",
+        "Sci-fi",
+        "Action",
+        "Drama",
+        "Comedy",
+        "Horror",
+        "Romance",
+        "Musical",
+        "Fantasy",
+        "History"
+    ]
     
     var body: some View {
         NavigationView {
@@ -50,7 +61,7 @@ struct AddFilmView: View {
                            onDismiss: loadImage,
                            content: { ImagePicker(image: $selectedImage) })
                     
-                    GenreScrollView(selected: $genre)
+                    GenreScrollView(selected: $genre, genres: genres)
                         .padding(.horizontal, 26)
                         .padding(.bottom, 15)
                     
@@ -93,13 +104,13 @@ struct AddFilmView: View {
 
                     Button(action: {
                         //if incomplete -> toast
-                        if filmImage == nil || genre == nil || title == "" {
+                        if filmImage == nil || title == "" {
                             showErrorToast.toggle()
                         }
                         //if complete -> save
                         else {
                             self.isShowingSheet = false
-                            addFilm(title: title, review: review, genre: genre!, recommend: recommend, poster: selectedImage!)
+                            addFilm(title: title, review: review, genre: genre, recommend: recommend, poster: selectedImage!)
                         }
                         }) {
                             Text("SAVE")

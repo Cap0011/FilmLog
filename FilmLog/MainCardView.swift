@@ -12,19 +12,22 @@ struct MainCardView: View {
     @ObservedObject var film: Film
     
     var body: some View {
-        ZStack {
-            Image(uiImage: UIImage(data: film.poster!)!)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 175, height: 263)
-                .cornerRadius(8)
-                .shadow(color: .black.opacity(0.5), radius: 15, x: 0, y: 2)
-                .offset(x: 80)
-            MainTextView(title: film.title!, review: film.review!, recommend: film.recommend)
-                .offset(x: -80)
+        if film.poster != nil {
+            ZStack {
+                let img = Image(uiImage: UIImage(data: film.poster!)!)
+                img
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 175, height: 263)
+                    .cornerRadius(8)
+                    .shadow(color: .black.opacity(0.5), radius: 15, x: 0, y: 2)
+                    .offset(x: 80)
+                MainTextView(title: film.title!, review: film.review!, recommend: film.recommend)
+                    .offset(x: -80)
+            }
+            .padding(.vertical, 15)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding(.vertical, 15)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

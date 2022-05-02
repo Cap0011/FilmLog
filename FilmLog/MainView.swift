@@ -10,7 +10,9 @@ import SwiftUI
 struct MainView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(sortDescriptors: [])
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.title)
+    ])
     
     private var films: FetchedResults<Film>
     @State private var selectedFilm: FetchedResults<Film>.Element?
@@ -19,8 +21,23 @@ struct MainView: View {
     @State private var isShowingEditSheet = false
     @State private var isShowingActionSheet = false
     
-    @State private var genre: Int?
-    @State private var idx = 0
+    @State private var genre = 0
+    
+    @State var refresh: Bool = false
+    
+    let genres: [String] = [
+        "All",
+        "Thriller",
+        "Sci-fi",
+        "Action",
+        "Drama",
+        "Comedy",
+        "Horror",
+        "Romance",
+        "Musical",
+        "Fantasy",
+        "History"
+    ]
     
     var body: some View {
         
@@ -28,32 +45,34 @@ struct MainView: View {
             ZStack {
                 Color("Blue").ignoresSafeArea()
                     VStack {
-                        GenreScrollView(selected: $genre)
+                        GenreScrollView(selected: $genre, genres: genres)
                         .frame(height: 36)
                         .padding(.horizontal, 26)
                         .padding(.top, 20)
                         ScrollView {
                             VStack(spacing: 0) {
-                                ForEach(self.films.indices, id: \.self) { index in
-                                    MainCardView(film: films[index])
-                                        .onTapGesture {
-                                            isShowingActionSheet = true
-                                            idx = index
-                                        }
-                                        .confirmationDialog(films[idx].title!, isPresented: $isShowingActionSheet, titleVisibility: .visible) {
-                                            Button("Edit", role: .none) {
-                                                //Open Edit Sheet
-                                                isShowingEditSheet.toggle()
-                                                selectedFilm = films[idx]
+                                ForEach(films) { film in
+                                    if genre == 0 || film.genre + 1 == genre {
+                                        MainCardView(film: film)
+                                            .confirmationDialog("Edit or Delete", isPresented: $isShowingActionSheet) {
+                                                Button("Edit", role: .none) {
+                                                    //Open Edit Sheet
+                                                    isShowingEditSheet.toggle()
+                                                }
+                                                Button("Delete", role: .destructive) {
+                                                    //Delete
+                                                    deleteFilm(object: selectedFilm!)
+                                                }
+                                                Button("Cancel", role: .cancel) {
+                                                    isShowingActionSheet = false
+                                                }
                                             }
-                                            Button("Delete", role: .destructive) {
-                                                //Delete
-                                                deleteFilm(object: films[idx])
+                                            .onTapGesture {
+                                                isShowingActionSheet = true
+                                                selectedFilm = film
                                             }
-                                            Button("Cancel", role: .cancel) {
-                                                isShowingActionSheet = false
-                                            }
-                                        }
+                                            
+                                    }
                                 }
                             }
                         }
@@ -87,7 +106,7 @@ struct MainView: View {
                     AddFilmView(isShowingSheet: self.$isShowingSheet)
                 }
                 .sheet(isPresented: $isShowingEditSheet) {
-                    EditFilmView(isShowingSheet: self.$isShowingEditSheet, film: $selectedFilm, idx: idx)
+                    EditFilmView(isShowingSheet: self.$isShowingEditSheet, film: $selectedFilm)
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -103,14 +122,8 @@ struct MainView: View {
         }
     }
     
-    private func deleteFilm(object: FetchedResults<Film>.Element) {
-        idx = 0
+    private func deleteFilm(object: Film) {
         viewContext.delete(object)
-        saveContext()
-    }
-    
-    private func updateFilm(_ film: FetchedResults<Film>.Element) {
-        film.title! += " Done!"
         saveContext()
     }
 }
