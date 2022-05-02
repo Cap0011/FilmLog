@@ -70,6 +70,7 @@ struct AddFilmView: View {
                             "FILM TITLE",
                             text: $title
                         )
+                    .preferredColorScheme(.light)
                     .frame(width: 318, height: 40)
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding([.horizontal], 10)
@@ -80,6 +81,7 @@ struct AddFilmView: View {
                             "How did you find the film?",
                             text: $review
                         )
+                    .preferredColorScheme(.light)
                     .frame(width: 318, height: 80)
                     .textFieldStyle(PlainTextFieldStyle())
                     .padding([.horizontal], 10)

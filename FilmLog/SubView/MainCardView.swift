@@ -67,6 +67,7 @@ struct MainTextView: View {
                         .foregroundColor(Color("Blue"))
                     Text(review)
                         .font(.custom(FontManager.Intro.condLight, size: 16))
+                        .foregroundColor(.black)
                 }
                 Spacer()
             }
