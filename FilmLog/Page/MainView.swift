@@ -54,7 +54,7 @@ struct MainView: View {
                                 ForEach(films) { film in
                                     if genre == 0 || film.genre + 1 == genre {
                                         MainCardView(film: film)
-                                            .confirmationDialog("Edit or Delete", isPresented: $isShowingActionSheet) {
+                                            .confirmationDialog(selectedFilm?.title ?? "", isPresented: $isShowingActionSheet, titleVisibility: .visible) {
                                                 Button("Edit", role: .none) {
                                                     //Open Edit Sheet
                                                     isShowingEditSheet.toggle()
@@ -68,10 +68,9 @@ struct MainView: View {
                                                 }
                                             }
                                             .onTapGesture {
-                                                isShowingActionSheet = true
                                                 selectedFilm = film
+                                                isShowingActionSheet = true
                                             }
-                                            
                                     }
                                 }
                             }

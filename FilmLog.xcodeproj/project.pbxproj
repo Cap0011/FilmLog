@@ -79,18 +79,14 @@
 			isa = PBXGroup;
 			children = (
 				C743C67428197E0E00B6215F /* Info.plist */,
-				C743C287281973D000B6215F /* FilmLogApp.swift */,
-				C743C677281990D200B6215F /* MainView.swift */,
-				C743C6872819C79400B6215F /* AddFilmView.swift */,
 				C7EAA2D8281BAF810024B05E /* FilmList.xcdatamodeld */,
-				C743C67928199F6F00B6215F /* MainCardView.swift */,
-				C743C6812819BBEF00B6215F /* GenreScrollView.swift */,
+				C743C287281973D000B6215F /* FilmLogApp.swift */,
 				C743C28B281973D300B6215F /* Assets.xcassets */,
-				C743C66B28197D8800B6215F /* Font */,
 				C743C28D281973D300B6215F /* Preview Content */,
-				C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */,
-				C7EAA2DB281BB02F0024B05E /* Persistence.swift */,
-				C7EAA2DF281BE6730024B05E /* EditFilmView.swift */,
+				C7703BC428200CB80046D608 /* Page */,
+				C7703BC528200CDD0046D608 /* SubView */,
+				C743C66B28197D8800B6215F /* Font */,
+				C7703BC628200CFD0046D608 /* Helper */,
 			);
 			path = FilmLog;
 			sourceTree = "<group>";
@@ -113,6 +109,34 @@
 				C743C67528197EF400B6215F /* FontManager.swift */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		C7703BC428200CB80046D608 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				C743C677281990D200B6215F /* MainView.swift */,
+				C743C6872819C79400B6215F /* AddFilmView.swift */,
+				C7EAA2DF281BE6730024B05E /* EditFilmView.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		C7703BC528200CDD0046D608 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				C743C67928199F6F00B6215F /* MainCardView.swift */,
+				C743C6812819BBEF00B6215F /* GenreScrollView.swift */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
+		C7703BC628200CFD0046D608 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */,
+				C7EAA2DB281BB02F0024B05E /* Persistence.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
