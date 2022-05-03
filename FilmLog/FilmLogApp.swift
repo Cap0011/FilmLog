@@ -14,7 +14,7 @@ struct FilmLogApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            TotalView()
                 .environment(\.managedObjectContext, persistenceContainer.container.viewContext)
         }
     }
