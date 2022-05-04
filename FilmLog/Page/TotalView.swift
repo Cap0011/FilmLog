@@ -11,6 +11,7 @@ struct TotalView: View {
     
     init() {
         UITabBar.appearance().barTintColor = UIColor(Color("Blue"))
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: FontManager.Intro.condBold, size: 12)! ], for: .normal)
     }
     
     var body: some View {
@@ -18,12 +19,13 @@ struct TotalView: View {
             MainView()
                 .tabItem {
                     Image(systemName: "film.fill")
-                        .tint(Color("Red"))
+                    Text("Watched")
+                        .font(.custom(FontManager.Intro.regular, size: 18))
                 }
             FilmListView()
                 .tabItem {
                     Image(systemName: "list.and.film")
-                        .tint(Color("Red"))
+                    Text("Explore")
                 }
         }
     }

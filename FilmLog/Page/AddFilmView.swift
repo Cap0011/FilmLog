@@ -66,7 +66,7 @@ struct AddFilmView: View {
                             self.selectedURL = nil
                             imagePickerPresented.toggle()
                         }
-                        Button("Look up on the internet", role: .none) {
+                        Button("Look up", role: .none) {
                             //Search Film
                             isShowingSearchSheet.toggle()
                         }
