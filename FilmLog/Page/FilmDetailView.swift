@@ -23,7 +23,6 @@ struct FilmDetailView: View {
                 FilmDetailListView(film: self.filmDetailState.film!)
             }
         }
-        .navigationBarTitle(filmDetailState.film?.title ?? "")
         .onAppear {
             self.filmDetailState.loadFilm(id: self.filmId)
         }
@@ -38,13 +37,16 @@ struct FilmDetailListView: View {
     
     var body: some View {
         List {
+            Text("\(film.title) (\(film.yearText))")
+                .font(.custom(FontManager.Intro.regular, size: 28))
+                .padding(.vertical, 5)
+            
             FilmDetailImage(imageURL: self.film.backdropURL)
                 .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             
             HStack {
                 Text(film.genreText)
                 Text("·")
-                Text(film.yearText)
                 Text(film.durationText)
             }
             .font(.custom(FontManager.Intro.condBold, size: 20))

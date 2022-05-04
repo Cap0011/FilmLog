@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C70B64B32822503B009A8FC7 /* ImageSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70B64B22822503B009A8FC7 /* ImageSearchView.swift */; };
 		C743C288281973D000B6215F /* FilmLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743C287281973D000B6215F /* FilmLogApp.swift */; };
 		C743C28C281973D300B6215F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C743C28B281973D300B6215F /* Assets.xcassets */; };
 		C743C28F281973D300B6215F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C743C28E281973D300B6215F /* Preview Assets.xcassets */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C70B64B22822503B009A8FC7 /* ImageSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchView.swift; sourceTree = "<group>"; };
 		C743C284281973D000B6215F /* FilmLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C743C287281973D000B6215F /* FilmLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmLogApp.swift; sourceTree = "<group>"; };
 		C743C28B281973D300B6215F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -168,6 +170,8 @@
 				C7703BE928216A930046D608 /* FilmListView.swift */,
 				C7703BF72821B1A00046D608 /* SafariView.swift */,
 				C7703BFB2821BCFD0046D608 /* SearchView.swift */,
+				C7703BF32821A16A0046D608 /* FilmDetailView.swift */,
+				C70B64B22822503B009A8FC7 /* ImageSearchView.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -183,7 +187,6 @@
 				C7703BE7282167B60046D608 /* FilmPosterCarouselView.swift */,
 				C7703BEF2821726F0046D608 /* LoadingView.swift */,
 				C7703BED2821711A0046D608 /* ActivityIndicatorView.swift */,
-				C7703BF32821A16A0046D608 /* FilmDetailView.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				C7703BF42821A16A0046D608 /* FilmDetailView.swift in Sources */,
 				C7703BD2282107EA0046D608 /* FilmDataStore.swift in Sources */,
 				C7703BF82821B1A00046D608 /* SafariView.swift in Sources */,
+				C70B64B32822503B009A8FC7 /* ImageSearchView.swift in Sources */,
 				C7703BF2282199C50046D608 /* TotalView.swift in Sources */,
 				C7703BEE2821711A0046D608 /* ActivityIndicatorView.swift in Sources */,
 				C743C678281990D200B6215F /* MainView.swift in Sources */,

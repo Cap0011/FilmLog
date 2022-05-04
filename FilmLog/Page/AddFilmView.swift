@@ -17,6 +17,10 @@ struct AddFilmView: View {
     
     @State private var imagePickerPresented = false
     @State private var selectedImage: UIImage?
+    @State private var selectedURL: URL?
+    @ObservedObject var imageLoader = ImageLoader()
+    @State private var isShowingActionSheet: Bool = false
+    @State private var isShowingSearchSheet: Bool = false
     
     @State private var filmImage: Image?
     @State private var genre: Int = 0
@@ -55,12 +59,31 @@ struct AddFilmView: View {
                             .foregroundColor(Color("Red"))
                     }
                     .padding(.bottom, 15)
+                    .confirmationDialog("How would you like to pick the film poster?", isPresented: $isShowingActionSheet, titleVisibility: .visible) {
+                        Button("Choose from gallery", role: .none) {
+                            //Open ImagePicker
+                            self.imageLoader.image = nil
+                            self.selectedURL = nil
+                            imagePickerPresented.toggle()
+                        }
+                        Button("Look up on the internet", role: .none) {
+                            //Search Film
+                            isShowingSearchSheet.toggle()
+                        }
+                        Button("Cancel", role: .cancel) {
+                            isShowingActionSheet = false
+                        }
+                    }
                     .onTapGesture {
-                        imagePickerPresented.toggle()
+                        isShowingActionSheet.toggle()
                     }
                     .sheet(isPresented: $imagePickerPresented,
                            onDismiss: loadImage,
                            content: { ImagePicker(image: $selectedImage) })
+                    .sheet(isPresented: $isShowingSearchSheet,
+                           onDismiss: loadImage) {
+                        ImageSearchView(imageLoader: imageLoader, isShowingSheet: $isShowingSearchSheet, selectedURL: $selectedURL, title: $title)
+                    }
                     
                     GenreScrollView(selected: $genre, genres: genres)
                         .padding(.horizontal, 26)
@@ -139,8 +162,20 @@ struct AddFilmView: View {
     }
     
     private func loadImage() {
-        guard let selectedImage = selectedImage else { return }
-        filmImage = Image(uiImage: selectedImage)
+        if self.selectedURL != nil {
+            self.imageLoader.loadImage(with: selectedURL!)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                if self.imageLoader.image != nil {
+                    selectedImage = self.imageLoader.image
+                    filmImage = Image(uiImage: selectedImage!)
+                } else {
+                    loadImage()
+                }
+            }
+        } else {
+            guard let selectedImage = selectedImage else { return }
+            filmImage = Image(uiImage: selectedImage)
+        }
     }
     
     private func saveContext() {

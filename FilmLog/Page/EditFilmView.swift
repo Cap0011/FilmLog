@@ -137,7 +137,7 @@ struct EditFilmView: View {
             genre = Int(film!.genre)
             title = (film?.title!)!
             review = (film?.review!)!
-            recommend = ((film?.recommend) != nil)
+            recommend = film!.recommend
             selectedImage = UIImage(data: (film?.poster)!)
         }
 

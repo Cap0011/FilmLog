@@ -22,6 +22,8 @@ struct FilmListView: View {
         UITableView.appearance().backgroundColor = .clear
         UITableView.appearance().separatorStyle = .none
         UINavigationBar.appearance().titleTextAttributes = [.font: UIFont(name: FontManager.Intro.regular, size: 20)!]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.font: UIFont(name: FontManager.Intro.regular, size: 24)!]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     var body: some View {
