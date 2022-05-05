@@ -123,7 +123,7 @@ struct FilmDetailListView: View {
                                 .font(.custom(FontManager.Intro.condBold, size: 16))
                             Spacer()
                             Image(systemName: "play.circle.fill")
-                                .foregroundColor(Color("Blue"))
+                                .foregroundColor(Color(UIColor.systemBlue))
                         }
                     }
                 }
