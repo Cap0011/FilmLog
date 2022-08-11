@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct FontManager {
+    static let rubikGlitch = "RubikGlitch-Regular"
+    
+    struct Inconsolata {
+        static let regular = "Inconsolata-Regular"
+    }
+    
     struct Intro {
         static let regular = "IntroDemo-BlackCAPS"
         static let regularInline = "IntroDemo-BlackInlineCAPS"

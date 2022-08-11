@@ -47,13 +47,10 @@ struct MainView: View {
         NavigationView {
             ZStack {
                 Color("Blue").ignoresSafeArea()
-                    VStack {
+                VStack(spacing: 16) {
                         searchBar(searchTitle: $searchTitle, isSearching: $isSearching)
-                            .padding(.top, 15)
-                            .padding(.bottom, 10)
                         GenreScrollView(selected: $genre, genres: genres)
                             .frame(height: 36)
-                            .padding(.horizontal, 20)
                         ScrollView {
                             VStack(spacing: 0) {
                                 ForEach(films) { film in
@@ -90,8 +87,8 @@ struct MainView: View {
                     }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Text("FILMLOG")
-                            .font(.custom(FontManager.Intro.regular, size: 21))
+                        Text("FilmLog")
+                            .font(.custom(FontManager.rubikGlitch, size: 20))
                             .foregroundColor(.white)
                             .accessibilityAddTraits(.isHeader)
                     }
@@ -140,15 +137,14 @@ struct searchBar: View {
         HStack {
             ZStack {
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(lineWidth: isSearching ? 2 : 1)
-                    .frame(height: 40)
-                HStack {
+                    .stroke(lineWidth: 1)
+                    .frame(height: 32)
+                HStack(spacing: 16) {
                     Image(systemName: "magnifyingglass")
-                        .padding(.leading, 10)
+                        .padding(.leading, 8)
                     ZStack(alignment: .leading) {
                         if searchTitle.isEmpty  {
-                            Text("Search film title")
-                                .font(.custom(FontManager.Intro.condLight, size: 16))
+                            Text("Film title")
                         }
                         TextField("", text: $searchTitle) { startedEditing in
                             if startedEditing {
@@ -161,9 +157,7 @@ struct searchBar: View {
                                 isSearching = false
                             }
                         }
-                            .font(.custom(FontManager.Intro.regular, size: 16))
                     }
-                    .padding(.leading, 10)
                 }
             }
             if isSearching {
@@ -175,12 +169,12 @@ struct searchBar: View {
                     }
                 } label: {
                     Text("Cancel")
-                        .font(.custom(FontManager.Intro.condLight, size: 16))
                 }
             }
         }
+        .font(.custom(FontManager.rubikGlitch, size: 16))
         .foregroundColor(isSearching ? .white : .white.opacity(0.6))
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 16)
     }
 }
 
