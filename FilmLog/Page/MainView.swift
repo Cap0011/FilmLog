@@ -49,8 +49,8 @@ struct MainView: View {
                 Color("Blue").ignoresSafeArea()
                 VStack(spacing: 16) {
                         searchBar(searchTitle: $searchTitle, isSearching: $isSearching)
-                        GenreScrollView(selected: $genre, genres: genres)
-                            .frame(height: 36)
+                        .padding(.top, 10)
+                        GenreScrollView(selected: $genre)
                         ScrollView {
                             VStack(spacing: 0) {
                                 ForEach(films) { film in

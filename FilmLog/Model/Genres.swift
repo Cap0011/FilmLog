@@ -8,6 +8,7 @@
 import Foundation
 
 enum Genres: String, CaseIterable {
+    case all = "All"
     case sciFi = "Sci-Fi"
     case action = "Action"
     case drama = "Drama"

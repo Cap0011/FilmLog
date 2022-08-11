@@ -10,39 +10,35 @@ import SwiftUI
 struct GenreScrollView: View {
     
     @Binding var selected: Int
-    
-    var genres: [String]
-    
+        
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
-                ForEach(genres.indices) { i in
-                    if i != selected {
-                        //unselected
+            HStack(spacing: 8) {
+                ForEach(Genres.allCases.indices) { idx in
+                    if idx != selected {
+                        // Unselected
                         ZStack {
-                            RoundedRectangle(cornerRadius: 18)
+                            RoundedRectangle(cornerRadius: 16)
                                 .stroke(Color("LightRed"), lineWidth: 1)
-                                .frame(width: 70, height: 32)
-                            Text(genres[i])
-                                .font(.custom(FontManager.Intro.condBold, size: 14))
+                                .frame(width: 68, height: 30)
+                            Text(Genres.allCases[idx].rawValue)
+                                .font(.custom(FontManager.rubikGlitch, size: 14))
                                 .foregroundColor(Color("LightRed"))
                         }
-                        .frame(minWidth: 74, minHeight: 36)
                         .onTapGesture {
                             withAnimation {
-                                selected = i
+                                selected = idx
                             }
                         }
                     } else {
-                        //selected
+                        // Selected
                         ZStack {
-                            RoundedRectangle(cornerRadius: 18)
-                                .frame(width: 74, height: 36)
+                            RoundedRectangle(cornerRadius: 16)
+                                .frame(width: 70, height: 32)
                                 .foregroundColor(Color("Red"))
-                            Text(genres[i])
-                                .font(.custom(FontManager.Intro.condBold, size: 14))
+                            Text(Genres.allCases[idx].rawValue)
+                                .font(.custom(FontManager.rubikGlitch, size: 14))
                                 .foregroundColor(.white)
-                                
                         }
                         .onTapGesture {
                             withAnimation {
@@ -52,6 +48,7 @@ struct GenreScrollView: View {
                     }
                 }
             }
+            .padding(.horizontal, 16)
         }
     }
 }

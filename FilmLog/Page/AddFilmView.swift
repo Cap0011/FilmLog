@@ -85,7 +85,7 @@ struct AddFilmView: View {
                         ImageSearchView(imageLoader: imageLoader, isShowingSheet: $isShowingSearchSheet, selectedURL: $selectedURL, title: $title)
                     }
                     
-                    GenreScrollView(selected: $genre, genres: genres)
+                    GenreScrollView(selected: $genre)
                         .padding(.horizontal, 26)
                         .padding(.bottom, 15)
                     

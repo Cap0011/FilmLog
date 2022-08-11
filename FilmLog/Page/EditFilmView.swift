@@ -63,7 +63,7 @@ struct EditFilmView: View {
                            onDismiss: loadImage,
                            content: { ImagePicker(image: $selectedImage) })
                     
-                    GenreScrollView(selected: $genre, genres: genres)
+                    GenreScrollView(selected: $genre)
                         .padding(.horizontal, 26)
                         .padding(.bottom, 15)
                     
