@@ -13,19 +13,16 @@ struct MainCardView: View {
     
     var body: some View {
         if film.poster != nil {
-            ZStack {
+            VStack {
                 let img = Image(uiImage: UIImage(data: film.poster!)!)
                 img
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 175, height: 263)
+                    .frame(width: UIScreen.main.bounds.size.width / 2 - 24)
                     .cornerRadius(8)
-                    .shadow(color: .black.opacity(0.5), radius: 15, x: 0, y: 2)
-                    .offset(x: 80)
                 MainTextView(title: film.title!, review: film.review!, recommend: film.recommend)
-                    .offset(x: -80)
+                    .offset(y: -40)
             }
-            .padding(.vertical, 15)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
@@ -38,44 +35,35 @@ struct MainTextView: View {
     var recommend: Bool
     
     var body: some View {
-        VStack (alignment: .leading) {
-            HStack {
-                Image(systemName: "ellipsis")
-                    .foregroundColor(Color("LightGrey"))
-                    .font(.system(size: 20))
-                    .frame(width: 30, height: 24)
-                Spacer()
-                if recommend {
-                    Image(systemName: "hand.thumbsup.fill")
-                        .foregroundColor(Color("Red"))
-                        .font(.system(size: 21))
-                        .frame(width: 26, height: 26)
-                        .padding(.trailing, 8)
-                } else {
-                    Image(systemName: "hand.thumbsdown.fill")
-                        .foregroundColor(Color("Red"))
-                        .font(.system(size: 21))
-                        .frame(width: 26, height: 26)
-                        .padding(.trailing, 8)
-                }
+        ZStack(alignment: .top) {
+            RoundedRectangle(cornerRadius: 18)
+                .frame(width: 36, height: 36)
+                .foregroundColor(.white)
+                .offset(y: -18)
+            
+            VStack(spacing: 4) {
+                Text(title)
+                    .font(.custom(FontManager.rubikGlitch, size: 20))
+                    .multilineTextAlignment(.center)
+                Text(review)
+                    .font(.custom(FontManager.Inconsolata.regular, size: 16))
+                    .multilineTextAlignment(.center)
             }
-            VStack {
-                Spacer()
-                VStack (alignment: .leading, spacing: 10) {
-                    Text(title)
-                        .font(.custom(FontManager.Intro.regular, size: 21))
-                        .foregroundColor(Color("Blue"))
-                    Text(review)
-                        .font(.custom(FontManager.Intro.condLight, size: 16))
-                        .foregroundColor(.black)
-                }
-                Spacer()
+            .padding(8)
+            
+            if recommend {
+                Image(systemName: "heart.fill")
+                    .foregroundColor(Color("Red"))
+                    .font(.system(size: 20))
+                    .offset(y: -12)
+            } else {
+                Image(systemName: "heart.slash.fill")
+                    .foregroundColor(Color("Red"))
+                    .font(.system(size: 20))
+                    .offset(y: -12)
             }
         }
-        .padding(8)
-        .frame(width: 175, height: 190)
-        .background(Color.white)
-        .cornerRadius(8)
-        .shadow(color: .black.opacity(0.5), radius: 10, x: 0, y: 2)
+        .frame(width: UIScreen.main.bounds.size.width / 2 - 24)
+        .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white))
     }
 }

@@ -27,21 +27,7 @@ struct MainView: View {
     @State private var genre = 0
     
     @State var refresh: Bool = false
-    
-    let genres: [String] = [
-        "All",
-        "Thriller",
-        "Sci-fi",
-        "Action",
-        "Drama",
-        "Comedy",
-        "Horror",
-        "Romance",
-        "Musical",
-        "Fantasy",
-        "History"
-    ]
-    
+
     var body: some View {
         
         NavigationView {
@@ -49,7 +35,7 @@ struct MainView: View {
                 Color("Blue").ignoresSafeArea()
                 VStack(spacing: 16) {
                         searchBar(searchTitle: $searchTitle, isSearching: $isSearching)
-                        .padding(.top, 10)
+                            .padding(.top, 10)
                         GenreScrollView(selected: $genre)
                         ScrollView {
                             VStack(spacing: 0) {
