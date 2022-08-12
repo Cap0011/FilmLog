@@ -17,13 +17,13 @@ struct MainCardView: View {
                 let img = Image(uiImage: UIImage(data: film.poster!)!)
                 img
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(168/248 ,contentMode: .fit)
                     .frame(width: UIScreen.main.bounds.size.width / 2 - 24)
                     .cornerRadius(8)
                 MainTextView(title: film.title!, review: film.review!, recommend: film.recommend)
                     .offset(y: -40)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.bottom, -40)
         }
     }
 }
@@ -41,7 +41,7 @@ struct MainTextView: View {
                 .foregroundColor(.white)
                 .offset(y: -18)
             
-            VStack(spacing: 4) {
+            VStack(spacing: 8) {
                 Text(title)
                     .font(.custom(FontManager.rubikGlitch, size: 20))
                     .multilineTextAlignment(.center)
@@ -49,7 +49,10 @@ struct MainTextView: View {
                     .font(.custom(FontManager.Inconsolata.regular, size: 16))
                     .multilineTextAlignment(.center)
             }
-            .padding(8)
+            .foregroundColor(.black)
+            .padding(.bottom, 16)
+            .padding(.top, 8)
+            .padding(.horizontal, 8)
             
             if recommend {
                 Image(systemName: "heart.fill")
@@ -57,7 +60,7 @@ struct MainTextView: View {
                     .font(.system(size: 20))
                     .offset(y: -12)
             } else {
-                Image(systemName: "heart.slash.fill")
+                Image(systemName: "heart.slash")
                     .foregroundColor(Color("Red"))
                     .font(.system(size: 20))
                     .offset(y: -12)

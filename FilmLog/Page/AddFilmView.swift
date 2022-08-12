@@ -28,19 +28,6 @@ struct AddFilmView: View {
     @State private var review: String = ""
     @State private var recommend: Bool = true
     
-    let genres: [String] = [
-        "Thriller",
-        "Sci-fi",
-        "Action",
-        "Drama",
-        "Comedy",
-        "Horror",
-        "Romance",
-        "Musical",
-        "Fantasy",
-        "History"
-    ]
-    
     var body: some View {
         NavigationView {
             ZStack {

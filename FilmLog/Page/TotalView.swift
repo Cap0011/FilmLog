@@ -17,12 +17,14 @@ struct TotalView: View {
     var body: some View {
         TabView {
             MainView()
+                .preferredColorScheme(.dark)
                 .tabItem {
                     Image(systemName: "film.fill")
                     Text("Watched")
                         .font(.custom(FontManager.Intro.regular, size: 18))
                 }
             FilmListView()
+                .preferredColorScheme(.dark)
                 .tabItem {
                     Image(systemName: "list.and.film")
                     Text("Explore")

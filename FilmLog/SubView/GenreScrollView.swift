@@ -26,9 +26,7 @@ struct GenreScrollView: View {
                                 .foregroundColor(Color("LightRed"))
                         }
                         .onTapGesture {
-                            withAnimation {
-                                selected = idx
-                            }
+                            selected = idx
                         }
                     } else {
                         // Selected
@@ -41,9 +39,7 @@ struct GenreScrollView: View {
                                 .foregroundColor(.white)
                         }
                         .onTapGesture {
-                            withAnimation {
-                                selected = 0
-                            }
+                            selected = 0
                         }
                     }
                 }
