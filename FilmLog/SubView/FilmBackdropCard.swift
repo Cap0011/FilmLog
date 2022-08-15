@@ -32,7 +32,9 @@ struct FilmBackdropCard: View {
         }
         .lineLimit(1)
         .onAppear {
-            self.imageLoader.loadImage(with: self.film.backdropURL)
+            Task {
+                await self.imageLoader.loadImage(with: self.film.backdropURL)
+            }
         }
     }
 }

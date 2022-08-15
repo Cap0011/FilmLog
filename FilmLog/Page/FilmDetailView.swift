@@ -150,7 +150,9 @@ struct FilmDetailImage: View {
         }
         .aspectRatio(16/9, contentMode: .fit)
         .onAppear {
-            self.imageLoader.loadImage(with: self.imageURL)
+            Task {
+                await self.imageLoader.loadImage(with: self.imageURL)
+            }
         }
     }
 }

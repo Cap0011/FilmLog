@@ -36,7 +36,7 @@ struct MainView: View {
                 VStack(spacing: 16) {
                         searchBar(searchTitle: $searchTitle, isSearching: $isSearching)
                             .padding(.top, 10)
-                        GenreScrollView(selected: $genre)
+                        GenreScrollView(selected: $genre, isAllIncluded: true)
                         ScrollView(showsIndicators: false) {
                             HStack(alignment: .top) {
                                 VStack(spacing: 16) {

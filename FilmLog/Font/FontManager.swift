@@ -12,6 +12,7 @@ struct FontManager {
     
     struct Inconsolata {
         static let regular = "Inconsolata-Regular"
+        static let black = "Inconsolata-Black"
     }
     
     struct Intro {

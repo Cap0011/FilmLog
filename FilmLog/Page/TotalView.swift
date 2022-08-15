@@ -11,6 +11,7 @@ struct TotalView: View {
     
     init() {
         UITabBar.appearance().barTintColor = UIColor(Color("Blue"))
+        UITextView.appearance().backgroundColor = .clear
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont.init(name: FontManager.Intro.condBold, size: 12)! ], for: .normal)
     }
     

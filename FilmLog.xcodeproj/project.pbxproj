@@ -23,6 +23,7 @@
 		C76C91EE28A5962800703CCD /* RubikGlitch-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C76C91ED28A5962800703CCD /* RubikGlitch-Regular.ttf */; };
 		C76C91F028A59B6900703CCD /* Inconsolata-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C76C91EF28A59B6900703CCD /* Inconsolata-Regular.ttf */; };
 		C76C91F328A59DC300703CCD /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C91F228A59DC300703CCD /* Genres.swift */; };
+		C76C91F528AAA53400703CCD /* Inconsolata-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C76C91F428AAA53400703CCD /* Inconsolata-Black.ttf */; };
 		C7703BCE282102BF0046D608 /* FilmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BCD282102BF0046D608 /* FilmData.swift */; };
 		C7703BD0282102CD0046D608 /* FilmDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BCF282102CD0046D608 /* FilmDataService.swift */; };
 		C7703BD2282107EA0046D608 /* FilmDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BD1282107EA0046D608 /* FilmDataStore.swift */; };
@@ -72,6 +73,7 @@
 		C76C91ED28A5962800703CCD /* RubikGlitch-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RubikGlitch-Regular.ttf"; sourceTree = "<group>"; };
 		C76C91EF28A59B6900703CCD /* Inconsolata-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-Regular.ttf"; sourceTree = "<group>"; };
 		C76C91F228A59DC300703CCD /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
+		C76C91F428AAA53400703CCD /* Inconsolata-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-Black.ttf"; sourceTree = "<group>"; };
 		C7703BCD282102BF0046D608 /* FilmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmData.swift; sourceTree = "<group>"; };
 		C7703BCF282102CD0046D608 /* FilmDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDataService.swift; sourceTree = "<group>"; };
 		C7703BD1282107EA0046D608 /* FilmDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDataStore.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		C743C66B28197D8800B6215F /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				C76C91F428AAA53400703CCD /* Inconsolata-Black.ttf */,
 				C76C91ED28A5962800703CCD /* RubikGlitch-Regular.ttf */,
 				C76C91EF28A59B6900703CCD /* Inconsolata-Regular.ttf */,
 				C743C66C28197DDC00B6215F /* IntroDemo-BlackCAPS.ttf */,
@@ -310,6 +313,7 @@
 				C743C28F281973D300B6215F /* Preview Assets.xcassets in Resources */,
 				C743C28C281973D300B6215F /* Assets.xcassets in Resources */,
 				C76C91EE28A5962800703CCD /* RubikGlitch-Regular.ttf in Resources */,
+				C76C91F528AAA53400703CCD /* Inconsolata-Black.ttf in Resources */,
 				C76C91F028A59B6900703CCD /* Inconsolata-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -34,7 +34,9 @@ struct FilmPosterCard: View {
         .padding(.bottom, 10)
         .frame(width: 204, height: 306)
         .onAppear {
-            self.imageLoader.loadImage(with: self.film.posterURL)
+            Task {
+                await self.imageLoader.loadImage(with: self.film.posterURL)
+            }
         }
     }
 }

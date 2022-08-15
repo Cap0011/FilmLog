@@ -30,134 +30,143 @@ struct AddFilmView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color("LightBlue").ignoresSafeArea()
+            ZStack(alignment: .top) {
+                Color("Blue").ignoresSafeArea()
                 VStack {
-                    ZStack {
-                        let image = filmImage ?? Image("White")
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 178, height: 266)
-                            .cornerRadius(8)
-                            .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2)
-                        Image(systemName: "plus.circle.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(Color("Red"))
-                    }
-                    .padding(.bottom, 15)
-                    .confirmationDialog("How would you like to pick the film poster?", isPresented: $isShowingActionSheet, titleVisibility: .visible) {
-                        Button("Choose from gallery", role: .none) {
-                            //Open ImagePicker
-                            self.imageLoader.image = nil
-                            self.selectedURL = nil
-                            imagePickerPresented.toggle()
+                    let image = filmImage ?? Image("White")
+                    image
+                        .resizable()
+                        .aspectRatio(168/248 ,contentMode: .fit)
+                        .frame(width: UIScreen.main.bounds.size.width / 2 - 24)
+                        .cornerRadius(8)
+                        .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2)
+                        .padding(.vertical, 16)
+                        .confirmationDialog("How would you like to pick the film poster?", isPresented: $isShowingActionSheet, titleVisibility: .visible) {
+                            Button("Choose from gallery", role: .none) {
+                                // Open ImagePicker
+                                self.imageLoader.image = nil
+                                self.selectedURL = nil
+                                imagePickerPresented.toggle()
+                            }
+                            Button("Look up", role: .none) {
+                                // Look up film from tmdb
+                                isShowingSearchSheet.toggle()
+                            }
+                            Button("Cancel", role: .cancel) {
+                                isShowingActionSheet = false
+                            }
                         }
-                        Button("Look up", role: .none) {
-                            //Search Film
-                            isShowingSearchSheet.toggle()
+                        .onTapGesture {
+                            isShowingActionSheet.toggle()
                         }
-                        Button("Cancel", role: .cancel) {
-                            isShowingActionSheet = false
+                        .sheet(isPresented: $imagePickerPresented,
+                               onDismiss: loadImage,
+                               content: { ImagePicker(image: $selectedImage) })
+                        .sheet(isPresented: $isShowingSearchSheet,
+                               onDismiss: loadImage) {
+                            ImageSearchView(imageLoader: imageLoader, isShowingSheet: $isShowingSearchSheet, selectedURL: $selectedURL, title: $title)
                         }
-                    }
-                    .onTapGesture {
-                        isShowingActionSheet.toggle()
-                    }
-                    .sheet(isPresented: $imagePickerPresented,
-                           onDismiss: loadImage,
-                           content: { ImagePicker(image: $selectedImage) })
-                    .sheet(isPresented: $isShowingSearchSheet,
-                           onDismiss: loadImage) {
-                        ImageSearchView(imageLoader: imageLoader, isShowingSheet: $isShowingSearchSheet, selectedURL: $selectedURL, title: $title)
-                    }
                     
-                    GenreScrollView(selected: $genre)
-                        .padding(.horizontal, 26)
-                        .padding(.bottom, 15)
+                    GenreScrollView(selected: $genre, isAllIncluded: false)
+                        .padding(.bottom, 16)
                     
-                    TextField(
-                            "FILM TITLE",
-                            text: $title
-                        )
-                    .preferredColorScheme(.light)
-                    .frame(width: 318, height: 40)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .padding([.horizontal], 10)
-                    .font(.custom(FontManager.Intro.regular, size: 16))
-                    .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white).frame(width: 338, height: 40).shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2))
-
-                    TextField(
-                            "How did you find the film?",
-                            text: $review
-                        )
-                    .preferredColorScheme(.light)
-                    .frame(width: 318, height: 80)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .padding([.horizontal], 10)
-                    .font(.custom(FontManager.Intro.condLight, size: 16))
-                    .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white).frame(width: 338, height: 80).shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2))
-                    .padding(.vertical, 10)
-
-                    HStack(spacing: 50) {
-                        Image(systemName: "hand.thumbsup.circle")
-                            .foregroundColor(recommend ? Color("Red") : Color("LightGrey"))
-                            .font(.system(size: 60))
+                    TextField("Film title", text: $title)
+                        .padding(.leading, 16)
+                        .foregroundColor(.white)
+                        .frame(height: 40)
+                        .font(.custom(FontManager.rubikGlitch, size: 17))
+                        .background(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 1).foregroundColor(.white))
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 8)
+                    
+                    ZStack(alignment: .topLeading) {
+                        if review.isEmpty {
+                            Text("How did you find the film?")
+                                .padding(.horizontal, 32)
+                                .padding(.top, 8)
+                                .foregroundColor(.white)
+                                .opacity(0.4)
+                        }
+                        
+                        TextEditor(text: $review)
+                            .padding(.horizontal, 12)
+                            .frame(height: 80)
+                            .lineSpacing(4)
+                            .background(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 1).foregroundColor(.white))
+                            .padding(.horizontal, 16)
+                    }
+                    .font(.custom(FontManager.Inconsolata.regular, size: 17))
+   
+                    VStack(spacing: 24) {
+                        Text("Would you watch it again?")
+                            .font(.custom(FontManager.Inconsolata.black, size: 22))
+                            .foregroundColor(.white)
+                        
+                        HStack(spacing: 80) {
+                            VStack(spacing: 5) {
+                                Image(systemName: "heart.fill")
+                                    .font(.system(size: 40))
+                                Text("For sure")
+                                    .font(.custom(FontManager.Inconsolata.regular, size: 17))
+                            }
+                            .foregroundColor(recommend ? Color("Red") : .white)
                             .onTapGesture {
                                 recommend = true
                             }
-                        Image(systemName: "hand.thumbsdown.circle")
-                            .foregroundColor(recommend ? Color("LightGrey") : Color("Red"))
-                            .font(.system(size: 60))
+                            
+                            VStack(spacing: 5) {
+                                Image(systemName: "heart.slash")
+                                    .font(.system(size: 40))
+                                Text("I'm good")
+                                    .font(.custom(FontManager.Inconsolata.regular, size: 17))
+                            }
+                            .foregroundColor(recommend ? .white : Color("Red"))
                             .onTapGesture {
                                 recommend = false
                             }
-                    }
-                    .padding(.bottom, 40)
-
-                    Button(action: {
-                        //if incomplete -> toast
-                        if filmImage == nil || title == "" {
-                            showErrorToast.toggle()
                         }
-                        //if complete -> save
-                        else {
-                            self.isShowingSheet = false
-                            addFilm(title: title, review: review, genre: genre, recommend: recommend, poster: selectedImage!)
-                        }
-                        }) {
-                            Text("SAVE")
-                                .frame(width: 338, height: 50)
-                                .font(.custom(FontManager.Intro.regular, size: 18))
-                                .foregroundColor(.white)
-                                .background(RoundedRectangle(cornerRadius: 25).foregroundColor(Color("Red")))
                     }
-                        .shadow(color: .black.opacity(0.22), radius: 15, x: 0, y: 2)
+                    .padding(.top, 24)
                 }
             }
             .toast(isPresenting: $showErrorToast, alert: {
                 AlertToast(displayMode: .banner(.pop), type: .error(Color("Red")), title: "Please fill in all the required fields.")
             })
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(leading: Button(action: {
-                self.isShowingSheet = false
-            }) {
-                Text("Cancel").bold()
-            })
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        self.isShowingSheet.toggle()
+                    } label: {
+                        Text("Cancel")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        // If incomplete -> toast
+                        if filmImage == nil || title == "" {
+                            showErrorToast.toggle()
+                        }
+                        // If complete -> save
+                        else {
+                            self.isShowingSheet = false
+                            addFilm(title: title, review: review, genre: genre, recommend: recommend, poster: selectedImage!)
+                        }
+                    } label: {
+                        Text("Save").bold()
+                    }
+                }
+            }
         }
-
+        
     }
     
     private func loadImage() {
         if self.selectedURL != nil {
-            self.imageLoader.loadImage(with: selectedURL!)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                if self.imageLoader.image != nil {
-                    selectedImage = self.imageLoader.image
-                    filmImage = Image(uiImage: selectedImage!)
-                } else {
-                    loadImage()
-                }
+            Task {
+                await self.imageLoader.loadImage(with: selectedURL!)
+                selectedImage = self.imageLoader.image
+                filmImage = Image(uiImage: selectedImage!)
             }
         } else {
             guard let selectedImage = selectedImage else { return }
@@ -175,7 +184,6 @@ struct AddFilmView: View {
     }
     
     private func addFilm(title: String, review: String, genre: Int, recommend: Bool, poster: UIImage) {
-        
         let newFilm = Film(context: viewContext)
         newFilm.title = title
         newFilm.recommend = recommend
