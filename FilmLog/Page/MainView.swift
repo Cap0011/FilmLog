@@ -114,7 +114,7 @@ struct MainView: View {
                 })
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Text("FilmLog")
+                        Text("Filog")
                             .font(.custom(FontManager.rubikGlitch, size: 20))
                             .foregroundColor(.white)
                             .accessibilityAddTraits(.isHeader)

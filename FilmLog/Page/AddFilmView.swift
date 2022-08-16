@@ -23,7 +23,7 @@ struct AddFilmView: View {
     @State private var isShowingSearchSheet: Bool = false
     
     @State private var filmImage: Image?
-    @State private var genre: Int = 0
+    @State private var genre: Int = 1
     @State private var title: String = ""
     @State private var review: String = ""
     @State private var recommend: Bool = true
@@ -158,14 +158,13 @@ struct AddFilmView: View {
                 }
             }
         }
-        
     }
     
     private func loadImage() {
         if self.selectedURL != nil {
             Task {
-                await self.imageLoader.loadImage(with: selectedURL!)
-                selectedImage = self.imageLoader.image
+                await self.imageLoader.loadImageforPoster(with: selectedURL!)
+                selectedImage = self.imageLoader.image ?? UIImage(named: "NoPoster")
                 filmImage = Image(uiImage: selectedImage!)
             }
         } else {
