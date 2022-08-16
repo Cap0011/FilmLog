@@ -77,46 +77,10 @@ struct FilmListView: View {
                             }
                         }
                     }
-                    
-//                    List {
-//                        Group {
-//                            if upcomingState.films != nil {
-//                                FilmBackdropCarouselView(title: "Upcoming", films: upcomingState.films!)
-//                            } else {
-//                                LoadingView(isLoading: upcomingState.isLoading, error: upcomingState.error) {
-//                                    self.upcomingState.loadFilms(with: .upcoming)
-//                                }
-//                            }
-//                        }
-//                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-//
-//                        Group {
-//                            if topRatedState.films != nil {
-//                                FilmBackdropCarouselView(title: "Top rated", films: topRatedState.films!)
-//                            } else {
-//                                LoadingView(isLoading: topRatedState.isLoading, error: topRatedState.error) {
-//                                    self.topRatedState.loadFilms(with: .topRated)
-//                                }
-//                            }
-//                        }
-//                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-//
-//                        Group {
-//                            if popularState.films != nil {
-//                                FilmBackdropCarouselView(title: "Popular", films: popularState.films!)
-//                            } else {
-//                                LoadingView(isLoading: popularState.isLoading, error: popularState.error) {
-//                                    self.popularState.loadFilms(with: .popular)
-//                                }
-//                            }
-//                        }
-//                        .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-//                    }
-//                    .foregroundColor(.white)
                 }
             }
             .sheet(isPresented: $isShowingSearchView) {
-                SearchView(filmSearchState: filmSearchState, isShowingSheet: self.$isShowingSearchView)
+                FilmSearchView(filmSearchState: filmSearchState, isShowingSheet: self.$isShowingSearchView)
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {

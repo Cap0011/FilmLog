@@ -25,6 +25,8 @@
 		C76C91F328A59DC300703CCD /* Genres.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C91F228A59DC300703CCD /* Genres.swift */; };
 		C76C91F528AAA53400703CCD /* Inconsolata-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C76C91F428AAA53400703CCD /* Inconsolata-Black.ttf */; };
 		C76C91FA28AB75CC00703CCD /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C91F928AB75CC00703CCD /* SearchBar.swift */; };
+		C76C91FC28AB90D400703CCD /* FilmSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C91FB28AB90D400703CCD /* FilmSearchView.swift */; };
+		C76C91FE28AB90F700703CCD /* FilmSearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C91FD28AB90F700703CCD /* FilmSearchRow.swift */; };
 		C7703BCE282102BF0046D608 /* FilmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BCD282102BF0046D608 /* FilmData.swift */; };
 		C7703BD0282102CD0046D608 /* FilmDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BCF282102CD0046D608 /* FilmDataService.swift */; };
 		C7703BD2282107EA0046D608 /* FilmDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BD1282107EA0046D608 /* FilmDataStore.swift */; };
@@ -47,7 +49,6 @@
 		C7703BF62821A1BB0046D608 /* FilmDetailState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BF52821A1BB0046D608 /* FilmDetailState.swift */; };
 		C7703BF82821B1A00046D608 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BF72821B1A00046D608 /* SafariView.swift */; };
 		C7703BFA2821B9720046D608 /* FilmSearchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BF92821B9720046D608 /* FilmSearchState.swift */; };
-		C7703BFC2821BCFD0046D608 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BFB2821BCFD0046D608 /* SearchView.swift */; };
 		C7EAA2CD281AD6E70024B05E /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */; };
 		C7EAA2D7281AEE5B0024B05E /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = C7EAA2D6281AEE5B0024B05E /* AlertToast */; };
 		C7EAA2DA281BAF810024B05E /* FilmList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C7EAA2D8281BAF810024B05E /* FilmList.xcdatamodeld */; };
@@ -76,6 +77,8 @@
 		C76C91F228A59DC300703CCD /* Genres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genres.swift; sourceTree = "<group>"; };
 		C76C91F428AAA53400703CCD /* Inconsolata-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-Black.ttf"; sourceTree = "<group>"; };
 		C76C91F928AB75CC00703CCD /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		C76C91FB28AB90D400703CCD /* FilmSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSearchView.swift; sourceTree = "<group>"; };
+		C76C91FD28AB90F700703CCD /* FilmSearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSearchRow.swift; sourceTree = "<group>"; };
 		C7703BCD282102BF0046D608 /* FilmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmData.swift; sourceTree = "<group>"; };
 		C7703BCF282102CD0046D608 /* FilmDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDataService.swift; sourceTree = "<group>"; };
 		C7703BD1282107EA0046D608 /* FilmDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDataStore.swift; sourceTree = "<group>"; };
@@ -98,7 +101,6 @@
 		C7703BF52821A1BB0046D608 /* FilmDetailState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDetailState.swift; sourceTree = "<group>"; };
 		C7703BF72821B1A00046D608 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		C7703BF92821B9720046D608 /* FilmSearchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmSearchState.swift; sourceTree = "<group>"; };
-		C7703BFB2821BCFD0046D608 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		C7EAA2D9281BAF810024B05E /* FilmList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FilmList.xcdatamodel; sourceTree = "<group>"; };
 		C7EAA2DB281BB02F0024B05E /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				C7703BE5282165D70046D608 /* FilmPosterCard.swift */,
 				C7703BE328211F050046D608 /* FilmBackdropCarouselView.swift */,
 				C7703BE128211BCD0046D608 /* FilmBackdropCard.swift */,
+				C76C91FD28AB90F700703CCD /* FilmSearchRow.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -205,9 +208,9 @@
 				C7703BF1282199C50046D608 /* TotalView.swift */,
 				C7703BE928216A930046D608 /* FilmListView.swift */,
 				C7703BF72821B1A00046D608 /* SafariView.swift */,
-				C7703BFB2821BCFD0046D608 /* SearchView.swift */,
 				C7703BF32821A16A0046D608 /* FilmDetailView.swift */,
 				C70B64B22822503B009A8FC7 /* ImageSearchView.swift */,
+				C76C91FB28AB90D400703CCD /* FilmSearchView.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -346,11 +349,11 @@
 				C7703BD0282102CD0046D608 /* FilmDataService.swift in Sources */,
 				C7EAA2E0281BE6730024B05E /* EditFilmView.swift in Sources */,
 				C7703BE028211A4D0046D608 /* ImageLoader.swift in Sources */,
-				C7703BFC2821BCFD0046D608 /* SearchView.swift in Sources */,
 				C76C91F328A59DC300703CCD /* Genres.swift in Sources */,
 				C7EAA2DA281BAF810024B05E /* FilmList.xcdatamodeld in Sources */,
 				C7703BFA2821B9720046D608 /* FilmSearchState.swift in Sources */,
 				C7703BEA28216A930046D608 /* FilmListView.swift in Sources */,
+				C76C91FE28AB90F700703CCD /* FilmSearchRow.swift in Sources */,
 				C743C67A28199F6F00B6215F /* MainCardView.swift in Sources */,
 				C7703BE6282165D70046D608 /* FilmPosterCard.swift in Sources */,
 				C7703BE428211F050046D608 /* FilmBackdropCarouselView.swift in Sources */,
@@ -364,6 +367,7 @@
 				C70B64B32822503B009A8FC7 /* ImageSearchView.swift in Sources */,
 				C7703BF2282199C50046D608 /* TotalView.swift in Sources */,
 				C7703BEE2821711A0046D608 /* ActivityIndicatorView.swift in Sources */,
+				C76C91FC28AB90D400703CCD /* FilmSearchView.swift in Sources */,
 				C743C678281990D200B6215F /* MainView.swift in Sources */,
 				C743C288281973D000B6215F /* FilmLogApp.swift in Sources */,
 				C7703BE8282167B60046D608 /* FilmPosterCarouselView.swift in Sources */,

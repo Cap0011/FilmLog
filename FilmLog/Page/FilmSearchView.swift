@@ -1,19 +1,16 @@
 //
-//  ImageSearchView.swift
+//  FilmSearchView.swift
 //  FilmLog
 //
-//  Created by Jiyoung Park on 2022/05/04.
+//  Created by Jiyoung Park on 2022/08/16.
 //
 
 import SwiftUI
 
-struct ImageSearchView: View {
+struct FilmSearchView: View {
     
     @ObservedObject var filmSearchState = FilmSearchState()
-    @ObservedObject var imageLoader: ImageLoader
     @Binding var isShowingSheet: Bool
-    @Binding var selectedURL: URL?
-    @Binding var title: String
     @State private var isSearching = false
     
     var body: some View {
@@ -30,14 +27,13 @@ struct ImageSearchView: View {
                         
                         if self.filmSearchState.films != nil {
                             ForEach(self.filmSearchState.films!) { film in
-                                FilmSearchRow(film: film)
-                                    .listRowBackground(Color.clear)
-                                .onTapGesture {
-                                    // Pass posterURL and film title, close this sheet
-                                    selectedURL = film.posterURL
-                                    title = film.title
-                                    imageLoader.image = nil
-                                    self.isShowingSheet = false
+                                NavigationLink(destination: FilmDetailView(filmId: film.id)) {
+                                    ZStack {
+                                        FilmSearchRow(film: film)
+                                            .listRowBackground(Color.clear)
+                                        Image(systemName: "chevron.forward")
+                                            .offset(x: 150)
+                                    }
                                 }
                             }
                         }
@@ -59,3 +55,4 @@ struct ImageSearchView: View {
         }
     }
 }
+
