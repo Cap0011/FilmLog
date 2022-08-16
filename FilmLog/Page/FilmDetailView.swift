@@ -15,13 +15,16 @@ struct FilmDetailView: View {
     var body: some View {
         ZStack {
             Color("Blue").ignoresSafeArea()
-            LoadingView(isLoading: self.filmDetailState.isLoading, error: self.filmDetailState.error) {
-                self.filmDetailState.loadFilm(id: self.filmId)
+            ScrollView {
+                LoadingView(isLoading: self.filmDetailState.isLoading, error: self.filmDetailState.error) {
+                    self.filmDetailState.loadFilm(id: self.filmId)
+                }
+                
+                if filmDetailState.film != nil {
+                    FilmDetailListView(film: self.filmDetailState.film!)
+                }
             }
-            
-            if filmDetailState.film != nil {
-                FilmDetailListView(film: self.filmDetailState.film!)
-            }
+            .ignoresSafeArea()
         }
         .onAppear {
             self.filmDetailState.loadFilm(id: self.filmId)
@@ -36,123 +39,157 @@ struct FilmDetailListView: View {
     let imageLoader = ImageLoader()
     
     var body: some View {
-        List {
-            Text("\(film.title) (\(film.yearText))")
-                .font(.custom(FontManager.Intro.regular, size: 28))
-                .padding(.vertical, 5)
-            
-            FilmDetailImage(imageURL: self.film.backdropURL)
-                .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
-            
-            HStack {
-                Text(film.genreText)
-                Text("·")
-                Text(film.durationText)
-            }
-            .font(.custom(FontManager.Intro.condBold, size: 20))
-            
-            Text(film.overview)
-                .font(.custom(FontManager.Intro.condLight, size: 18))
-                .lineSpacing(3)
-            HStack {
-                if !film.ratingText.isEmpty {
-                    Text(film.ratingText).foregroundColor(.yellow)
+        ZStack(alignment: .topLeading) {
+            Color("Blue").ignoresSafeArea()
+            VStack(alignment: .leading) {
+                ZStack(alignment: .bottomTrailing) {
+                    FilmDetailImage(imageURL: self.film.backdropURL)
+                    FilmRatingCircle(value: film.voteAverage * 10)
+                        .offset(x: -16, y: -16)
                 }
-                Text(film.scoreText)
-            }
-            .font(.custom(FontManager.Intro.condBold, size: 20))
-            HStack(alignment: .top, spacing: 4) {
-                if film.cast != nil && film.cast!.count > 0 {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text("Starring")
-                            .font(.custom(FontManager.Intro.condBold, size: 18))
-                        ForEach(self.film.cast!.prefix(9)) { cast in
-                            Text(cast.name)
-                                .font(.custom(FontManager.Intro.condLight, size: 16))
+                HStack {
+                    FilmPosterImage(imageURL: self.film.posterURL)
+                        .shadow(radius: 4)
+                        .offset(y: -50)
+                        .padding(.bottom, -50)
+                        .padding(.leading, 16)
+                        .padding(.trailing, 8)
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(film.title)
+                            .font(.custom(FontManager.Inconsolata.black, size: 22))
+                        Text("\(film.genreText)· \(film.durationText) · \(film.yearText)")
+                            .font(.custom(FontManager.Inconsolata.regular, size: 16))
+                        HStack(spacing: 8) {
+                            Image(systemName: "plus.circle.fill")
+                                .onTapGesture {
+                                    // TODO: Leave a review
+                                }
+                            Image(systemName: "bookmark.circle.fill")
+                                .onTapGesture {
+                                    // TODO: Add to watch list
+                                }
                         }
+                        .font(.system(size: 30))
+                        .foregroundColor(Color("Red"))
                     }
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    Spacer()
+                    .padding(.trailing, 8)
+                    .foregroundColor(.white)
+                }
+                
+                VStack(alignment: .leading) {
+                    Text("Overview")
+                        .font(.custom(FontManager.Inconsolata.black, size: 18))
+                        .foregroundColor(Color("Red"))
+                        .padding(.bottom, 8)
+                    Text(film.overview)
+                        .padding(.bottom, 16)
                     
+                    Text("Director")
+                        .font(.custom(FontManager.Inconsolata.black, size: 18))
+                        .foregroundColor(Color("Red"))
+                        .padding(.bottom, 8)
+                    Text(film.directorText)
+                        .padding(.bottom, 16)
+                    
+                    Text("Cast")
+                        .font(.custom(FontManager.Inconsolata.black, size: 18))
+                        .foregroundColor(Color("Red"))
+                        .padding(.bottom, 8)
+                    Text(film.castText)
+                        .padding(.bottom, 16)
+                    
+                    Text("Videos")
+                        .font(.custom(FontManager.Inconsolata.black, size: 18))
+                        .foregroundColor(Color("Red"))
+                        .padding(.bottom, 8)
                 }
+                .frame(maxHeight: .infinity)
+                .padding(.top, 24)
+                .padding(.horizontal, 16)
+                .lineSpacing(8)
+                .minimumScaleFactor(1)
+                .font(.custom(FontManager.Inconsolata.regular, size: 16))
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.white)
                 
-                if film.crew != nil && film.crew!.count > 0 {
-                    VStack(alignment: .leading, spacing: 4) {
-                        if film.directors != nil && film.directors!.count > 0 {
-                            Text("Director(s)")
-                                .font(.custom(FontManager.Intro.condBold, size: 18))
-                            ForEach(self.film.directors!.prefix(2)) { crew in
-                                Text(crew.name)
-                                    .font(.custom(FontManager.Intro.condLight, size: 16))
-                            }
-                        }
-                        
-                        if film.producers != nil && film.producers!.count > 0 {
-                            Text("Producer(s)")
-                                .font(.custom(FontManager.Intro.condBold, size: 18))
-                                .padding(.top)
-                            ForEach(self.film.producers!.prefix(2)) { crew in
-                                Text(crew.name)
-                                    .font(.custom(FontManager.Intro.condLight, size: 16))
-                            }
-                        }
-                        
-                        if film.screenWriters != nil && film.screenWriters!.count > 0 {
-                            Text("Screenwriter(s)")
-                                .font(.custom(FontManager.Intro.condBold, size: 18))
-                                .padding(.top)
-                            ForEach(self.film.screenWriters!.prefix(2)) { crew in
-                                Text(crew.name)
-                                    .font(.custom(FontManager.Intro.condLight, size: 16))
-                            }
-                        }
-                    }
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                if film.videos != nil && film.videos!.results.count > 0 {
+                    YoutubeCarouselView(videos: film.videos!.results)
                 }
             }
-            if film.youtubeTrailers != nil && film.youtubeTrailers!.count > 0 {
-                Text("Trailers")
-                    .font(.custom(FontManager.Intro.condBold, size: 18))
-                
-                ForEach(film.youtubeTrailers!) { trailer in
-                    Button(action: {
-                        self.selectedTrailer = trailer
-                    }) {
-                        HStack {
-                            Text(trailer.name)
-                                .font(.custom(FontManager.Intro.condBold, size: 16))
-                            Spacer()
-                            Image(systemName: "play.circle.fill")
-                                .foregroundColor(Color(UIColor.systemBlue))
-                        }
-                    }
-                }
-            }
-        }
-        .sheet(item: self.$selectedTrailer) { trailer in
-            SafariView(url: trailer.youtubeURL!)
+            .ignoresSafeArea()
+            .padding(.bottom, 100)
         }
     }
 }
 
 struct FilmDetailImage: View {
-    
     @ObservedObject private var imageLoader = ImageLoader()
     let imageURL: URL
     
     var body: some View {
         ZStack {
-            Rectangle().fill(.gray.opacity(0.3))
+            Image("NoPosterBackdrop")
+                .resizable()
             if self.imageLoader.image != nil {
                 Image(uiImage: self.imageLoader.image!)
                     .resizable()
             }
         }
-        .aspectRatio(16/9, contentMode: .fit)
+        .aspectRatio(270/152, contentMode: .fit)
+        .frame(width: UIScreen.main.bounds.size.width)
         .onAppear {
-            Task {
-                await self.imageLoader.loadImage(with: self.imageURL)
+            self.imageLoader.loadImage(with: self.imageURL)
+        }
+    }
+}
+
+struct FilmPosterImage: View {
+    @ObservedObject private var imageLoader = ImageLoader()
+    let imageURL: URL
+    
+    var body: some View {
+        ZStack {
+            Image("NoPoster")
+                .resizable()
+            if self.imageLoader.image != nil {
+                Image(uiImage: self.imageLoader.image!)
+                    .resizable()
             }
+        }
+        .aspectRatio(2/3, contentMode: .fit)
+        .frame(width: 120)
+        .cornerRadius(4)
+        .onAppear {
+            self.imageLoader.loadImage(with: self.imageURL)
+        }
+    }
+}
+
+struct FilmRatingCircle: View {
+    let value: Double
+    
+    var body: some View {
+        ZStack {
+            Circle()
+                .foregroundColor(Color("Blue"))
+                .frame(width: 46, height: 46)
+            
+            Circle()
+                .stroke(lineWidth: 3)
+                .foregroundColor(Color("Red"))
+                .opacity(0.3)
+                .frame(width: 41, height: 41)
+            
+            Circle()
+                .trim(from: 0.0, to: CGFloat(value * 0.01))
+                .stroke(style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+                .foregroundColor(Color("Red"))
+                .frame(width: 41, height: 41)
+                .rotationEffect(.degrees(-90))
+            
+            Text("\(Int(value))%")
+                .font(.custom(FontManager.Inconsolata.black, size: 20))
+                .foregroundColor(.white)
         }
     }
 }

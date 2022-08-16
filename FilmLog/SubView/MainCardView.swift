@@ -17,7 +17,7 @@ struct MainCardView: View {
                 let img = Image(uiImage: UIImage(data: film.poster!)!)
                 img
                     .resizable()
-                    .aspectRatio(168/248 ,contentMode: .fit)
+                    .aspectRatio(168/248, contentMode: .fit)
                     .frame(width: UIScreen.main.bounds.size.width / 2 - 24)
                     .cornerRadius(8)
                 MainTextView(title: film.title!, review: film.review!, recommend: film.recommend)

@@ -14,11 +14,4 @@ struct FontManager {
         static let regular = "Inconsolata-Regular"
         static let black = "Inconsolata-Black"
     }
-    
-    struct Intro {
-        static let regular = "IntroDemo-BlackCAPS"
-        static let regularInline = "IntroDemo-BlackInlineCAPS"
-        static let condBold = "IntroDemoCond-BlackCAPS"
-        static let condLight = "IntroDemoCond-LightCAPS"
-    }
 }

@@ -32,13 +32,6 @@ struct FilmData : Decodable, Identifiable {
         return formatter
     }()
     
-    static private let durationFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.unitsStyle = .full
-        formatter.allowedUnits = [.hour, .minute]
-        return formatter
-    }()
-    
     var backdropURL: URL {
         return URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")!
     }
@@ -48,7 +41,16 @@ struct FilmData : Decodable, Identifiable {
     }
     
     var genreText: String {
-        genres?.first?.name ?? "n/a"
+        var text = ""
+        if genres?.count ?? 0 < 3 {
+            genres?.forEach { genre in
+                text = text + "\(genre.name) "
+            }
+        } else {
+            text = "\(genres![0].name) \(genres![1].name) \(genres![2].name) "
+        }
+        
+        return text
     }
     
     var ratingText: String {
@@ -78,7 +80,31 @@ struct FilmData : Decodable, Identifiable {
             return "n/a"
         }
         
-        return FilmData.durationFormatter.string(from: TimeInterval(runtime) * 60) ?? "n/a"
+        return "\(runtime / 60)h \(runtime % 60)m"
+    }
+    
+    var directorText: String {
+        if self.directors != nil && self.directors!.count > 0 {
+            var text = ""
+            self.directors!.forEach { director in
+                text = "\(text)\(director.name) · "
+            }
+            return String(text.dropLast(3))
+        } else {
+            return "n/a"
+        }
+    }
+    
+    var castText: String {
+        if self.cast != nil && self.cast!.count > 0 {
+            var text = ""
+            self.cast!.prefix(10).forEach { cast in
+                text = "\(text)\(cast.name) · "
+            }
+            return String(text.dropLast(3))
+        } else {
+            return "n/a"
+        }
     }
     
     var cast: [FilmCast]? {
@@ -145,5 +171,9 @@ struct FilmVideo: Decodable, Identifiable {
             return nil
         }
         return URL(string: "https://youtube.com/watch?v=\(key)")
+    }
+    
+    var youtubeThumbnailURL: URL? {
+        return URL(string: "https://img.youtube.com/vi/\(key)/0.jpg")
     }
 }

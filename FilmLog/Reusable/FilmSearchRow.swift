@@ -27,6 +27,7 @@ struct FilmSearchRow: View {
                     Text(film.yearText)
                         .font(.custom(FontManager.Inconsolata.regular, size: 16))
                 }
+                .multilineTextAlignment(.leading)
                 .foregroundColor(.white)
                 Spacer()
             }
