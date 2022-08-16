@@ -15,27 +15,25 @@ struct FilmBackdropCarouselView: View {
     var body: some View {
         ZStack {
             Color("Blue").ignoresSafeArea()
-            VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 16) {
                 Text(title)
-                    .font(.custom(FontManager.Intro.regular, size: 21))
-                    .padding(.horizontal)
-                    .padding(.top, 30)
-                    .foregroundColor(Color("Red"))
+                    .font(.custom(FontManager.rubikGlitch, size: 20))
+                    .padding(.leading, 24)
+                    .foregroundColor(.white)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .top, spacing: 18) {
+                    HStack(spacing: 16) {
                         ForEach(self.films) { film in
                             NavigationLink(destination: FilmDetailView(filmId: film.id)) {
                                 FilmBackdropCard(film: film)
-                                    .frame(width: 272, height: 200)
-                                    .padding(.trailing, film.id == self.films.last!.id ? 16 : 0)
                             }
-                            .buttonStyle(PlainButtonStyle())
                         }
                     }
+                    .padding(.horizontal, 16)
                 }
             }
         }
+        .padding(.bottom, 24)
     }
 }
 

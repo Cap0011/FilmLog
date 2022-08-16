@@ -34,7 +34,7 @@ struct MainView: View {
             ZStack {
                 Color("Blue").ignoresSafeArea()
                 VStack(spacing: 16) {
-                        searchBar(searchTitle: $searchTitle, isSearching: $isSearching)
+                        SearchBar(searchTitle: $searchTitle, isSearching: $isSearching)
                             .padding(.top, 10)
                         GenreScrollView(selected: $genre, isAllIncluded: true)
                         ScrollView(showsIndicators: false) {
@@ -152,56 +152,6 @@ struct MainView: View {
     private func deleteFilm(object: Film) {
         viewContext.delete(object)
         saveContext()
-    }
-}
-
-struct searchBar: View {
-    
-    @Binding var searchTitle: String
-    @Binding var isSearching: Bool
-    
-    var body: some View {
-        HStack {
-            ZStack {
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(lineWidth: 1)
-                    .frame(height: 32)
-                HStack(spacing: 16) {
-                    Image(systemName: "magnifyingglass")
-                        .padding(.leading, 8)
-                    ZStack(alignment: .leading) {
-                        if searchTitle.isEmpty  {
-                            Text("Film title")
-                        }
-                        TextField("", text: $searchTitle) { startedEditing in
-                            if startedEditing {
-                                withAnimation {
-                                    isSearching = true
-                                }
-                            }
-                        } onCommit: {
-                            withAnimation {
-                                isSearching = false
-                            }
-                        }
-                    }
-                }
-            }
-            if isSearching {
-                Button {
-                    searchTitle = ""
-                    withAnimation {
-                        isSearching = false
-                        UIApplication.shared.dismissKeyboard()
-                    }
-                } label: {
-                    Text("Cancel")
-                }
-            }
-        }
-        .font(.custom(FontManager.rubikGlitch, size: 16))
-        .foregroundColor(isSearching ? .white : .white.opacity(0.6))
-        .padding(.horizontal, 16)
     }
 }
 

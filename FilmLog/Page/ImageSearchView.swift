@@ -21,7 +21,7 @@ struct ImageSearchView: View {
             ZStack(alignment: .top) {
                 Color("Blue").ignoresSafeArea()
                 VStack {
-                    searchBar(searchTitle: $filmSearchState.query, isSearching: $isSearching)
+                    SearchBar(searchTitle: $filmSearchState.query, isSearching: $isSearching)
                     
                     ScrollView {
                         LoadingView(isLoading: self.filmSearchState.isLoading, error: self.filmSearchState.error) {

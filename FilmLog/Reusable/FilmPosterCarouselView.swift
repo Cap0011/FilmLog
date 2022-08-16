@@ -17,24 +17,23 @@ struct FilmPosterCarouselView: View {
             Color("Blue").ignoresSafeArea()
             VStack(alignment: .leading, spacing: 16) {
                 Text(title)
-                    .font(.custom(FontManager.Intro.regular, size: 21))
-                    .padding(.horizontal)
+                    .font(.custom(FontManager.rubikGlitch, size: 20))
+                    .padding(.leading, 24)
                     .foregroundColor(Color("Red"))
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .top, spacing: 18) {
+                    HStack(spacing: 16) {
                         ForEach(self.films) { film in
                             NavigationLink(destination: FilmDetailView(filmId: film.id)) {
                                 FilmPosterCard(film: film)
-                                    .padding(.trailing, film.id == self.films.last!.id ? 16 : 0)
                             }
-                            .buttonStyle(PlainButtonStyle())
                         }
                     }
+                    .padding(.horizontal, 16)
                 }
             }
         }
-        
+        .padding(.bottom, 24)
     }
 }
 
