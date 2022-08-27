@@ -14,6 +14,7 @@ struct ImageSearchView: View {
     @Binding var isShowingSheet: Bool
     @Binding var selectedURL: URL?
     @Binding var title: String
+    @Binding var id: String
     @State private var isSearching = false
     
     var body: some View {
@@ -37,6 +38,7 @@ struct ImageSearchView: View {
                                     selectedURL = film.posterURL
                                     title = film.title
                                     imageLoader.image = nil
+                                    id = String(film.id)
                                     self.isShowingSheet = false
                                 }
                             }

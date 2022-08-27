@@ -18,18 +18,22 @@ struct TotalView: View {
     var body: some View {
         TabView {
             MainView()
-                .preferredColorScheme(.dark)
                 .tabItem {
                     Image(systemName: "film.fill")
                     Text("Watched")
                 }
             FilmListView()
-                .preferredColorScheme(.dark)
                 .tabItem {
                     Image(systemName: "list.and.film")
                     Text("Explore")
                 }
+            RecommendationView()
+                .tabItem {
+                    Image(systemName: "rays")
+                    Text("For You")
+                }
         }
+        .preferredColorScheme(.dark)
     }
 }
 

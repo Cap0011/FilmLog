@@ -27,6 +27,7 @@ struct AddFilmView: View {
     @State private var title: String = ""
     @State private var review: String = ""
     @State private var recommend: Bool = true
+    @State private var id: String = ""
     
     var body: some View {
         NavigationView {
@@ -64,7 +65,7 @@ struct AddFilmView: View {
                                content: { ImagePicker(image: $selectedImage) })
                         .sheet(isPresented: $isShowingSearchSheet,
                                onDismiss: loadImage) {
-                            ImageSearchView(imageLoader: imageLoader, isShowingSheet: $isShowingSearchSheet, selectedURL: $selectedURL, title: $title)
+                            ImageSearchView(imageLoader: imageLoader, isShowingSheet: $isShowingSearchSheet, selectedURL: $selectedURL, title: $title, id: $id)
                         }
                     
                     GenreScrollView(selected: $genre, isAllIncluded: false)
@@ -189,6 +190,7 @@ struct AddFilmView: View {
         newFilm.review = review
         newFilm.genre = Int64(genre)
         newFilm.poster = poster.pngData()
+        newFilm.id = id
         
         saveContext()
     }

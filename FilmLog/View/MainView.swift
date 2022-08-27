@@ -98,6 +98,7 @@ struct MainView: View {
                     }
                 .onAppear {
                     resultFilms = films.filter{ $0.genre >= 0 }
+                    Constants.shared.films = films.filter{ $0.genre >= 0 }
                 }
                 .onChange(of: genre) { genre in
                     if genre == 0 { resultFilms = films.filter{ $0.genre >= 0 } }
