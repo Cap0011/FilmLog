@@ -11,10 +11,6 @@
 		C743C288281973D000B6215F /* FilmLogApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743C287281973D000B6215F /* FilmLogApp.swift */; };
 		C743C28C281973D300B6215F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C743C28B281973D300B6215F /* Assets.xcassets */; };
 		C743C28F281973D300B6215F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C743C28E281973D300B6215F /* Preview Assets.xcassets */; };
-		C743C67028197DDD00B6215F /* IntroDemo-BlackCAPS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C743C66C28197DDC00B6215F /* IntroDemo-BlackCAPS.ttf */; };
-		C743C67128197DDD00B6215F /* IntroDemoCond-BlackCAPS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C743C66D28197DDD00B6215F /* IntroDemoCond-BlackCAPS.ttf */; };
-		C743C67228197DDD00B6215F /* IntroDemo-BlackInlineCAPS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C743C66E28197DDD00B6215F /* IntroDemo-BlackInlineCAPS.ttf */; };
-		C743C67328197DDD00B6215F /* IntroDemoCond-LightCAPS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C743C66F28197DDD00B6215F /* IntroDemoCond-LightCAPS.ttf */; };
 		C743C67628197EF400B6215F /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743C67528197EF400B6215F /* FontManager.swift */; };
 		C743C678281990D200B6215F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743C677281990D200B6215F /* MainView.swift */; };
 		C743C67A28199F6F00B6215F /* MainCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743C67928199F6F00B6215F /* MainCardView.swift */; };
@@ -63,10 +59,6 @@
 		C743C287281973D000B6215F /* FilmLogApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmLogApp.swift; sourceTree = "<group>"; };
 		C743C28B281973D300B6215F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C743C28E281973D300B6215F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C743C66C28197DDC00B6215F /* IntroDemo-BlackCAPS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntroDemo-BlackCAPS.ttf"; sourceTree = "<group>"; };
-		C743C66D28197DDD00B6215F /* IntroDemoCond-BlackCAPS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntroDemoCond-BlackCAPS.ttf"; sourceTree = "<group>"; };
-		C743C66E28197DDD00B6215F /* IntroDemo-BlackInlineCAPS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntroDemo-BlackInlineCAPS.ttf"; sourceTree = "<group>"; };
-		C743C66F28197DDD00B6215F /* IntroDemoCond-LightCAPS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IntroDemoCond-LightCAPS.ttf"; sourceTree = "<group>"; };
 		C743C67428197E0E00B6215F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C743C67528197EF400B6215F /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
 		C743C677281990D200B6215F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -148,8 +140,7 @@
 				C743C287281973D000B6215F /* FilmLogApp.swift */,
 				C743C28B281973D300B6215F /* Assets.xcassets */,
 				C743C28D281973D300B6215F /* Preview Content */,
-				C7703BC428200CB80046D608 /* Page */,
-				C7703BC528200CDD0046D608 /* SubView */,
+				C7703BC428200CB80046D608 /* View */,
 				C743C66B28197D8800B6215F /* Font */,
 				C7703BC628200CFD0046D608 /* Helper */,
 			);
@@ -170,10 +161,6 @@
 				C76C91F428AAA53400703CCD /* Inconsolata-Black.ttf */,
 				C76C91ED28A5962800703CCD /* RubikGlitch-Regular.ttf */,
 				C76C91EF28A59B6900703CCD /* Inconsolata-Regular.ttf */,
-				C743C66C28197DDC00B6215F /* IntroDemo-BlackCAPS.ttf */,
-				C743C66E28197DDD00B6215F /* IntroDemo-BlackInlineCAPS.ttf */,
-				C743C66D28197DDD00B6215F /* IntroDemoCond-BlackCAPS.ttf */,
-				C743C66F28197DDD00B6215F /* IntroDemoCond-LightCAPS.ttf */,
 				C743C67528197EF400B6215F /* FontManager.swift */,
 			);
 			path = Font;
@@ -183,6 +170,8 @@
 			isa = PBXGroup;
 			children = (
 				C76C91F228A59DC300703CCD /* Genres.swift */,
+				C7703BCD282102BF0046D608 /* FilmData.swift */,
+				C7703BDF28211A4D0046D608 /* ImageLoader.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -190,6 +179,7 @@
 		C76C91F628AB759400703CCD /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */,
 				C76C91F928AB75CC00703CCD /* SearchBar.swift */,
 				C743C6812819BBEF00B6215F /* GenreScrollView.swift */,
 				C7703BE7282167B60046D608 /* FilmPosterCarouselView.swift */,
@@ -198,11 +188,14 @@
 				C7703BE128211BCD0046D608 /* FilmBackdropCard.swift */,
 				C76C91FD28AB90F700703CCD /* FilmSearchRow.swift */,
 				C76C920128ABDD2500703CCD /* YoutubeCarouselView.swift */,
+				C743C67928199F6F00B6215F /* MainCardView.swift */,
+				C7703BEF2821726F0046D608 /* LoadingView.swift */,
+				C7703BED2821711A0046D608 /* ActivityIndicatorView.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
 		};
-		C7703BC428200CB80046D608 /* Page */ = {
+		C7703BC428200CB80046D608 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				C743C677281990D200B6215F /* MainView.swift */,
@@ -215,30 +208,17 @@
 				C70B64B22822503B009A8FC7 /* ImageSearchView.swift */,
 				C76C91FB28AB90D400703CCD /* FilmSearchView.swift */,
 			);
-			path = Page;
-			sourceTree = "<group>";
-		};
-		C7703BC528200CDD0046D608 /* SubView */ = {
-			isa = PBXGroup;
-			children = (
-				C743C67928199F6F00B6215F /* MainCardView.swift */,
-				C7703BEF2821726F0046D608 /* LoadingView.swift */,
-				C7703BED2821711A0046D608 /* ActivityIndicatorView.swift */,
-			);
-			path = SubView;
+			path = View;
 			sourceTree = "<group>";
 		};
 		C7703BC628200CFD0046D608 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				C7EAA2CC281AD6E70024B05E /* ImagePicker.swift */,
 				C7EAA2DB281BB02F0024B05E /* Persistence.swift */,
-				C7703BCD282102BF0046D608 /* FilmData.swift */,
 				C7703BCF282102CD0046D608 /* FilmDataService.swift */,
 				C7703BD1282107EA0046D608 /* FilmDataStore.swift */,
 				C7703BD3282109C10046D608 /* Utils.swift */,
 				C7703BD5282117490046D608 /* FilmData+Stub.swift */,
-				C7703BDF28211A4D0046D608 /* ImageLoader.swift */,
 				C7703BEB28216B460046D608 /* FilmListState.swift */,
 				C7703BF52821A1BB0046D608 /* FilmDetailState.swift */,
 				C7703BF92821B9720046D608 /* FilmSearchState.swift */,
@@ -321,11 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7703BDE282119D90046D608 /* film_list.json in Resources */,
-				C743C67328197DDD00B6215F /* IntroDemoCond-LightCAPS.ttf in Resources */,
 				C7703BDD282119D90046D608 /* film_info.json in Resources */,
-				C743C67028197DDD00B6215F /* IntroDemo-BlackCAPS.ttf in Resources */,
-				C743C67128197DDD00B6215F /* IntroDemoCond-BlackCAPS.ttf in Resources */,
-				C743C67228197DDD00B6215F /* IntroDemo-BlackInlineCAPS.ttf in Resources */,
 				C7703BDC282119D90046D608 /* search_film.json in Resources */,
 				C743C28F281973D300B6215F /* Preview Assets.xcassets in Resources */,
 				C743C28C281973D300B6215F /* Assets.xcassets in Resources */,

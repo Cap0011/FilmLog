@@ -4,10 +4,6 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>IntroDemo-BlackCAPS.ttf</string>
-		<string>IntroDemo-BlackInlineCAPS.ttf</string>
-		<string>IntroDemoCond-BlackCAPS.ttf</string>
-		<string>IntroDemoCond-LightCAPS.ttf</string>
 		<string>RubikGlitch-Regular.ttf</string>
 		<string>Inconsolata-Regular.ttf</string>
 		<string>Inconsolata-Black.ttf</string>
