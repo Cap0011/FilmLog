@@ -8,11 +8,10 @@
 import Foundation
 
 class FilmDataStore: FilmDataService {
-    
     static let shared = FilmDataStore()
     private init() {}
     
-    private let apiKey = "bd750e014535b8c95c51b15435489a70"
+    private let apiKey = Secret.apiKey
     private let baseAPIURL = "https://api.themoviedb.org/3"
     private let urlSession = URLSession.shared
     private let jsonDecoder = Utils.jsonDecoder
@@ -33,6 +32,22 @@ class FilmDataStore: FilmDataService {
         self.loadURLAndDecode(url: url, params: [
             "append_to_response": "videos,credits"
         ], completion: completion)
+    }
+    
+    func fetchSimilarFilms(id: Int, completion: @escaping (Result<FilmResponse, FilmError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/movie/\(id)/similar") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, completion: completion)
+    }
+    
+    func fetchRecommendationFilms(id: Int, completion: @escaping (Result<FilmResponse, FilmError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/movie/\(id)/recommendations") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, completion: completion)
     }
     
     func searchFilm(query: String, completion: @escaping (Result<FilmResponse, FilmError>) -> ()) {

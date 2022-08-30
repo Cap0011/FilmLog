@@ -40,7 +40,7 @@ class Recommender: ObservableObject {
     private func userRatings() -> [Int64: Double] {
         var ratings: [Int64: Double] = [:]
         Constants.shared.films.forEach { film in
-            if film.recommend {
+            if film.recommend && Constants.shared.TMDBtoML[film.id!] != nil {
                 ratings[Int64(Constants.shared.TMDBtoML[film.id!]!)!] = 5.0
             }
         }
@@ -57,7 +57,9 @@ class Recommender: ObservableObject {
             var tempFilms = [String]()
 
             for id in result.recommendations {
-                tempFilms.append(Constants.shared.MLtoTMDB[String(id)] ?? "0")
+                if Constants.shared.MLtoTMDB[String(id)] != nil {
+                    tempFilms.append(Constants.shared.MLtoTMDB[String(id)]!)
+                }
             }
             filmIDs = tempFilms
         } catch(let error) {

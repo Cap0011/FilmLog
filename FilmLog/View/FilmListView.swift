@@ -29,7 +29,7 @@ struct FilmListView: View {
                         HStack(spacing: 16) {
                             Image(systemName: "magnifyingglass")
                                 .padding(.leading, 8)
-                            Text("Look up films you want")
+                            Text("Look up films")
                                 .font(.custom(FontManager.rubikGlitch, size: 16))
                             Spacer()
                         }
@@ -45,7 +45,7 @@ struct FilmListView: View {
                         VStack(alignment: .leading) {
                             if nowPlayingState.films != nil {
                                 FilmPosterCarouselView(title: "Now Playing", films: nowPlayingState.films!)
-                                    .padding(.top, 24)
+                                    .padding(.top, 16)
                             } else {
                                 LoadingView(isLoading: nowPlayingState.isLoading, error: nowPlayingState.error) {
                                     self.nowPlayingState.loadFilms(with: .nowPlaying)

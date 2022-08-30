@@ -29,6 +29,9 @@
 		C76C922A28BA7E1A00703CCD /* Recommender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C922928BA7E1A00703CCD /* Recommender.swift */; };
 		C76C922C28BA84AB00703CCD /* links.csv in Resources */ = {isa = PBXBuildFile; fileRef = C76C922B28BA84AB00703CCD /* links.csv */; };
 		C76C922E28BA855300703CCD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C922D28BA855300703CCD /* Constants.swift */; };
+		C76C923028BB443600703CCD /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C922F28BB443600703CCD /* Secret.swift */; };
+		C76C923228BD37A700703CCD /* RecommendationPostersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C923128BD37A700703CCD /* RecommendationPostersView.swift */; };
+		C76C923728BE4B2700703CCD /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = C76C923628BE4B2700703CCD /* CachedAsyncImage */; };
 		C7703BCE282102BF0046D608 /* FilmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BCD282102BF0046D608 /* FilmData.swift */; };
 		C7703BD0282102CD0046D608 /* FilmDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BCF282102CD0046D608 /* FilmDataService.swift */; };
 		C7703BD2282107EA0046D608 /* FilmDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BD1282107EA0046D608 /* FilmDataStore.swift */; };
@@ -83,6 +86,8 @@
 		C76C922928BA7E1A00703CCD /* Recommender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommender.swift; sourceTree = "<group>"; };
 		C76C922B28BA84AB00703CCD /* links.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = links.csv; sourceTree = "<group>"; };
 		C76C922D28BA855300703CCD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		C76C922F28BB443600703CCD /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
+		C76C923128BD37A700703CCD /* RecommendationPostersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationPostersView.swift; sourceTree = "<group>"; };
 		C7703BCD282102BF0046D608 /* FilmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmData.swift; sourceTree = "<group>"; };
 		C7703BCF282102CD0046D608 /* FilmDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDataService.swift; sourceTree = "<group>"; };
 		C7703BD1282107EA0046D608 /* FilmDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDataStore.swift; sourceTree = "<group>"; };
@@ -117,6 +122,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7EAA2D7281AEE5B0024B05E /* AlertToast in Frameworks */,
+				C76C923728BE4B2700703CCD /* CachedAsyncImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,10 +185,10 @@
 		C76C91F128A59DAA00703CCD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C76C922728BA569600703CCD /* MyMovieRecommender.mlmodel */,
 				C76C91F228A59DC300703CCD /* Genres.swift */,
 				C7703BCD282102BF0046D608 /* FilmData.swift */,
 				C7703BDF28211A4D0046D608 /* ImageLoader.swift */,
-				C76C922728BA569600703CCD /* MyMovieRecommender.mlmodel */,
 				C76C922928BA7E1A00703CCD /* Recommender.swift */,
 			);
 			path = Model;
@@ -203,6 +209,7 @@
 				C743C67928199F6F00B6215F /* MainCardView.swift */,
 				C7703BEF2821726F0046D608 /* LoadingView.swift */,
 				C7703BED2821711A0046D608 /* ActivityIndicatorView.swift */,
+				C76C923128BD37A700703CCD /* RecommendationPostersView.swift */,
 			);
 			path = Reusable;
 			sourceTree = "<group>";
@@ -237,6 +244,7 @@
 				C7703BF52821A1BB0046D608 /* FilmDetailState.swift */,
 				C7703BF92821B9720046D608 /* FilmSearchState.swift */,
 				C76C922D28BA855300703CCD /* Constants.swift */,
+				C76C922F28BB443600703CCD /* Secret.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -269,6 +277,7 @@
 			name = FilmLog;
 			packageProductDependencies = (
 				C7EAA2D6281AEE5B0024B05E /* AlertToast */,
+				C76C923628BE4B2700703CCD /* CachedAsyncImage */,
 			);
 			productName = FilmLog;
 			productReference = C743C284281973D000B6215F /* FilmLog.app */;
@@ -300,6 +309,7 @@
 			mainGroup = C743C27B281973D000B6215F;
 			packageReferences = (
 				C7EAA2D5281AEE5B0024B05E /* XCRemoteSwiftPackageReference "AlertToast" */,
+				C76C923528BE4B2700703CCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
 			productRefGroup = C743C285281973D000B6215F /* Products */;
 			projectDirPath = "";
@@ -342,6 +352,7 @@
 				C7703BD4282109C10046D608 /* Utils.swift in Sources */,
 				C7703BF02821726F0046D608 /* LoadingView.swift in Sources */,
 				C7703BF62821A1BB0046D608 /* FilmDetailState.swift in Sources */,
+				C76C923228BD37A700703CCD /* RecommendationPostersView.swift in Sources */,
 				C7703BD0282102CD0046D608 /* FilmDataService.swift in Sources */,
 				C76C922828BA569700703CCD /* MyMovieRecommender.mlmodel in Sources */,
 				C7EAA2E0281BE6730024B05E /* EditFilmView.swift in Sources */,
@@ -355,6 +366,7 @@
 				C7703BE6282165D70046D608 /* FilmPosterCard.swift in Sources */,
 				C7703BE428211F050046D608 /* FilmBackdropCarouselView.swift in Sources */,
 				C76C922E28BA855300703CCD /* Constants.swift in Sources */,
+				C76C923028BB443600703CCD /* Secret.swift in Sources */,
 				C743C67628197EF400B6215F /* FontManager.swift in Sources */,
 				C7EAA2CD281AD6E70024B05E /* ImagePicker.swift in Sources */,
 				C76C91FA28AB75CC00703CCD /* SearchBar.swift in Sources */,
@@ -577,6 +589,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C76C923528BE4B2700703CCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		C7EAA2D5281AEE5B0024B05E /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
@@ -588,6 +608,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C76C923628BE4B2700703CCD /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C76C923528BE4B2700703CCD /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
+		};
 		C7EAA2D6281AEE5B0024B05E /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C7EAA2D5281AEE5B0024B05E /* XCRemoteSwiftPackageReference "AlertToast" */;

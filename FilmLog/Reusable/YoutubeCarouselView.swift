@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct YoutubeCarouselView: View {
     
@@ -30,43 +31,39 @@ struct YoutubeCarouselView: View {
 struct YoutubeBackdropCard: View {
     let thumbnailURL: URL
     let videoName: String
-    @ObservedObject var imageLoader = ImageLoader()
     
     var body: some View {
         VStack(alignment: .leading) {
-            if self.imageLoader.image != nil {
-                ZStack {
-                    Image(uiImage: self.imageLoader.image!)
+            ZStack {
+                CachedAsyncImage(url: thumbnailURL)  { image in
+                    image
                         .resizable()
-                        .scaledToFill()
-                        .frame(width: 270, height: 150, alignment: .center)
-                        .clipped()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(8)
-                        .shadow(radius: 4)
-                    Image(systemName: "play.circle.fill")
-                        .font(.system(size: 44))
-                        .foregroundColor(.white)
-                        .opacity(0.85)
+                } placeholder: {
+                    Image("NoPosterBackdrop")
+                        .resizable()
+                        .aspectRatio(16/9, contentMode: .fit)
                 }
-            } else {
-                Image("NoPosterBackdrop")
-                    .resizable()
-                    .aspectRatio(16/9, contentMode: .fit)
-                    .cornerRadius(8)
-                    .shadow(radius: 4)
+                .scaledToFill()
+                .frame(width: 270, height: 150, alignment: .center)
+                .clipped()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(8)
+                .shadow(radius: 4)
+                
+                Image(systemName: "play.circle.fill")
+                    .font(.system(size: 44))
+                    .foregroundColor(.white)
+                    .opacity(0.85)
             }
+            
             Text(videoName)
                 .multilineTextAlignment(.leading)
-                .font(.custom(FontManager.Inconsolata.regular, size: 14))
+                .font(.system(size: 14, weight: .regular))
                 .foregroundColor(.white)
                 .padding(.horizontal, 8)
                 .truncationMode(.tail)
                 .lineLimit(1)
         }
         .frame(width: 270)
-        .onAppear {
-            self.imageLoader.loadImage(with: self.thumbnailURL)
-        }
     }
 }

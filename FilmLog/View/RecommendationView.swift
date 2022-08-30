@@ -11,13 +11,45 @@ import SwiftUI
 struct RecommendationView: View {
     @ObservedObject var recommendations = Recommender()
     
+    @ObservedObject private var recommendationsState = FilmListState()
+    
     var body: some View {
-        VStack {
-            Text("This is top 10 recommendations just for you")
+        NavigationView {
+            ZStack {
+                Color("Blue").ignoresSafeArea()
+                VStack(spacing: 16) {
+                    Text("Films you might love")
+                        .foregroundColor(Color("Red"))
+                        .font(.system(size: 24, weight: .black))
+                        .padding(.top, 56)
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 4)
+                    
+                    if recommendationsState.films != nil && recommendationsState.films!.count == 10 {
+                        RecommendationPostersView(films: recommendationsState.films!)
+                    } else {
+                        LoadingView(isLoading: recommendationsState.isLoading, error: recommendationsState.error) {
+                            recommendationsState.loadFilms(with: recommendations.filmIDs)
+                        }
+                    }
+                }
+                .ignoresSafeArea()
+            }
+            .ignoresSafeArea()
+//            .toolbar {
+//                ToolbarItem(placement: .principal) {
+//                    Text("Filog")
+//                        .font(.custom(FontManager.rubikGlitch, size: 20))
+//                        .foregroundColor(.white)
+//                        .accessibilityAddTraits(.isHeader)
+//                }
+//            }
         }
+        .navigationBarHidden(true)
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             recommendations.load()
-            print(recommendations.filmIDs)
+            recommendationsState.loadFilms(with: recommendations.filmIDs)
         }
     }
 }

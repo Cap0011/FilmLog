@@ -17,7 +17,7 @@ struct FilmBackdropCarouselView: View {
             Color("Blue").ignoresSafeArea()
             VStack(alignment: .leading, spacing: 16) {
                 Text(title)
-                    .font(.custom(FontManager.rubikGlitch, size: 20))
+                    .font(.system(size: 20, weight: .black))
                     .padding(.leading, 24)
                     .foregroundColor(.white)
                 
@@ -33,7 +33,7 @@ struct FilmBackdropCarouselView: View {
                 }
             }
         }
-        .padding(.bottom, 24)
+        .padding(.bottom, 16)
     }
 }
 
