@@ -42,9 +42,6 @@
 		C7703BD2282107EA0046D608 /* FilmDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BD1282107EA0046D608 /* FilmDataStore.swift */; };
 		C7703BD4282109C10046D608 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BD3282109C10046D608 /* Utils.swift */; };
 		C7703BD6282117490046D608 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BD5282117490046D608 /* Extension.swift */; };
-		C7703BDC282119D90046D608 /* search_film.json in Resources */ = {isa = PBXBuildFile; fileRef = C7703BD9282119D90046D608 /* search_film.json */; };
-		C7703BDD282119D90046D608 /* film_info.json in Resources */ = {isa = PBXBuildFile; fileRef = C7703BDA282119D90046D608 /* film_info.json */; };
-		C7703BDE282119D90046D608 /* film_list.json in Resources */ = {isa = PBXBuildFile; fileRef = C7703BDB282119D90046D608 /* film_list.json */; };
 		C7703BE228211BCD0046D608 /* FilmBackdropCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BE128211BCD0046D608 /* FilmBackdropCard.swift */; };
 		C7703BE428211F050046D608 /* FilmBackdropCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BE328211F050046D608 /* FilmBackdropCarouselView.swift */; };
 		C7703BE6282165D70046D608 /* FilmPosterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BE5282165D70046D608 /* FilmPosterCard.swift */; };
@@ -99,9 +96,6 @@
 		C7703BD1282107EA0046D608 /* FilmDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDataStore.swift; sourceTree = "<group>"; };
 		C7703BD3282109C10046D608 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C7703BD5282117490046D608 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		C7703BD9282119D90046D608 /* search_film.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = search_film.json; sourceTree = "<group>"; };
-		C7703BDA282119D90046D608 /* film_info.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = film_info.json; sourceTree = "<group>"; };
-		C7703BDB282119D90046D608 /* film_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = film_list.json; sourceTree = "<group>"; };
 		C7703BE128211BCD0046D608 /* FilmBackdropCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmBackdropCard.swift; sourceTree = "<group>"; };
 		C7703BE328211F050046D608 /* FilmBackdropCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmBackdropCarouselView.swift; sourceTree = "<group>"; };
 		C7703BE5282165D70046D608 /* FilmPosterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmPosterCard.swift; sourceTree = "<group>"; };
@@ -152,7 +146,6 @@
 			children = (
 				C76C91F628AB759400703CCD /* Reusable */,
 				C76C91F128A59DAA00703CCD /* Model */,
-				C7703BD8282117BA0046D608 /* Resources */,
 				C743C67428197E0E00B6215F /* Info.plist */,
 				C7EAA2D8281BAF810024B05E /* FilmList.xcdatamodeld */,
 				C743C287281973D000B6215F /* FilmLogApp.swift */,
@@ -253,16 +246,6 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		C7703BD8282117BA0046D608 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				C7703BDA282119D90046D608 /* film_info.json */,
-				C7703BDB282119D90046D608 /* film_list.json */,
-				C7703BD9282119D90046D608 /* search_film.json */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -327,10 +310,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7703BDE282119D90046D608 /* film_list.json in Resources */,
-				C7703BDD282119D90046D608 /* film_info.json in Resources */,
 				C76C922C28BA84AB00703CCD /* links.csv in Resources */,
-				C7703BDC282119D90046D608 /* search_film.json in Resources */,
 				C743C28F281973D300B6215F /* Preview Assets.xcassets in Resources */,
 				C743C28C281973D300B6215F /* Assets.xcassets in Resources */,
 				C76C91EE28A5962800703CCD /* RubikGlitch-Regular.ttf in Resources */,
