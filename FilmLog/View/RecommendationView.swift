@@ -13,43 +13,55 @@ struct RecommendationView: View {
     
     @ObservedObject private var recommendationsState = FilmListState()
     
+    @State private var isLoaded = false
+    
     var body: some View {
         NavigationView {
-            ZStack {
+            ZStack(alignment: .top) {
                 Color("Blue").ignoresSafeArea()
                 VStack(spacing: 16) {
-                    Text("Films you might love")
-                        .foregroundColor(Color("Red"))
-                        .font(.system(size: 24, weight: .black))
-                        .padding(.top, 56)
-                        .padding(.horizontal, 16)
-                        .padding(.bottom, 4)
+                    ZStack {
+                        Text("Films you might love")
+                            .foregroundColor(Color("Red"))
+                            .offset(x: 3)
+                        
+                        Text("Films you might love")
+                            .foregroundColor(.white)
+                    }
+                    .font(.system(size: 28, weight: .black))
+                    .padding(.top, 64)
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 4)
                     
-                    if recommendationsState.films != nil && recommendationsState.films!.count == 10 {
+                    if recommendationsState.films != nil && recommendationsState.films!.count == 50 {
                         RecommendationPostersView(films: recommendationsState.films!)
+                            .padding(.top, 16)
+                            .onAppear {
+                                isLoaded = true
+                            }
                     } else {
-                        LoadingView(isLoading: recommendationsState.isLoading, error: recommendationsState.error) {
-                            recommendationsState.loadFilms(with: recommendations.filmIDs)
+                        if recommendations.filmIDs.isEmpty {
+                            Text("Leave reviews to get personalised film recommendations!")
+                                .foregroundColor(.white)
+                                .multilineTextAlignment(.center)
+                        } else {
+                            LoadingView(isLoading: recommendationsState.isLoading, error: recommendationsState.error) {
+                                recommendationsState.loadFilms(with: recommendations.filmIDs)
+                            }
                         }
                     }
                 }
                 .ignoresSafeArea()
             }
             .ignoresSafeArea()
-//            .toolbar {
-//                ToolbarItem(placement: .principal) {
-//                    Text("Filog")
-//                        .font(.custom(FontManager.rubikGlitch, size: 20))
-//                        .foregroundColor(.white)
-//                        .accessibilityAddTraits(.isHeader)
-//                }
-//            }
         }
         .navigationBarHidden(true)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            recommendations.load()
-            recommendationsState.loadFilms(with: recommendations.filmIDs)
+            if !isLoaded {
+                recommendations.load()
+                recommendationsState.loadFilms(with: recommendations.filmIDs)
+            }
         }
     }
 }

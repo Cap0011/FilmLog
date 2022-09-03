@@ -32,6 +32,9 @@
 		C76C923028BB443600703CCD /* Secret.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C922F28BB443600703CCD /* Secret.swift */; };
 		C76C923228BD37A700703CCD /* RecommendationPostersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C923128BD37A700703CCD /* RecommendationPostersView.swift */; };
 		C76C923728BE4B2700703CCD /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = C76C923628BE4B2700703CCD /* CachedAsyncImage */; };
+		C76C923B28BE901500703CCD /* PersonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C923A28BE901400703CCD /* PersonData.swift */; };
+		C76C923D28BE916A00703CCD /* PersonDetailState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C923C28BE916A00703CCD /* PersonDetailState.swift */; };
+		C76C923F28BE922100703CCD /* PersonDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76C923E28BE922100703CCD /* PersonDetailView.swift */; };
 		C7703BCE282102BF0046D608 /* FilmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BCD282102BF0046D608 /* FilmData.swift */; };
 		C7703BD0282102CD0046D608 /* FilmDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BCF282102CD0046D608 /* FilmDataService.swift */; };
 		C7703BD2282107EA0046D608 /* FilmDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7703BD1282107EA0046D608 /* FilmDataStore.swift */; };
@@ -88,6 +91,9 @@
 		C76C922D28BA855300703CCD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		C76C922F28BB443600703CCD /* Secret.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secret.swift; sourceTree = "<group>"; };
 		C76C923128BD37A700703CCD /* RecommendationPostersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationPostersView.swift; sourceTree = "<group>"; };
+		C76C923A28BE901400703CCD /* PersonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonData.swift; sourceTree = "<group>"; };
+		C76C923C28BE916A00703CCD /* PersonDetailState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailState.swift; sourceTree = "<group>"; };
+		C76C923E28BE922100703CCD /* PersonDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailView.swift; sourceTree = "<group>"; };
 		C7703BCD282102BF0046D608 /* FilmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmData.swift; sourceTree = "<group>"; };
 		C7703BCF282102CD0046D608 /* FilmDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDataService.swift; sourceTree = "<group>"; };
 		C7703BD1282107EA0046D608 /* FilmDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmDataStore.swift; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 				C7703BCD282102BF0046D608 /* FilmData.swift */,
 				C7703BDF28211A4D0046D608 /* ImageLoader.swift */,
 				C76C922928BA7E1A00703CCD /* Recommender.swift */,
+				C76C923A28BE901400703CCD /* PersonData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -227,6 +234,7 @@
 				C70B64B22822503B009A8FC7 /* ImageSearchView.swift */,
 				C76C91FB28AB90D400703CCD /* FilmSearchView.swift */,
 				C76C922328BA54B400703CCD /* RecommendationView.swift */,
+				C76C923E28BE922100703CCD /* PersonDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 				C7703BF92821B9720046D608 /* FilmSearchState.swift */,
 				C76C922D28BA855300703CCD /* Constants.swift */,
 				C76C922F28BB443600703CCD /* Secret.swift */,
+				C76C923C28BE916A00703CCD /* PersonDetailState.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -356,11 +365,13 @@
 				C7703BD0282102CD0046D608 /* FilmDataService.swift in Sources */,
 				C76C922828BA569700703CCD /* MyMovieRecommender.mlmodel in Sources */,
 				C7EAA2E0281BE6730024B05E /* EditFilmView.swift in Sources */,
+				C76C923B28BE901500703CCD /* PersonData.swift in Sources */,
 				C7703BE028211A4D0046D608 /* ImageLoader.swift in Sources */,
 				C76C91F328A59DC300703CCD /* Genres.swift in Sources */,
 				C7EAA2DA281BAF810024B05E /* FilmList.xcdatamodeld in Sources */,
 				C7703BFA2821B9720046D608 /* FilmSearchState.swift in Sources */,
 				C7703BEA28216A930046D608 /* FilmListView.swift in Sources */,
+				C76C923D28BE916A00703CCD /* PersonDetailState.swift in Sources */,
 				C76C91FE28AB90F700703CCD /* FilmSearchRow.swift in Sources */,
 				C743C67A28199F6F00B6215F /* MainCardView.swift in Sources */,
 				C7703BE6282165D70046D608 /* FilmPosterCard.swift in Sources */,
@@ -384,6 +395,7 @@
 				C7703BE8282167B60046D608 /* FilmPosterCarouselView.swift in Sources */,
 				C743C6822819BBEF00B6215F /* GenreScrollView.swift in Sources */,
 				C7703BD6282117490046D608 /* FilmData+Stub.swift in Sources */,
+				C76C923F28BE922100703CCD /* PersonDetailView.swift in Sources */,
 				C76C922428BA54B400703CCD /* RecommendationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,7 +453,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -495,7 +507,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -517,6 +529,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmLog/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Filog;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -527,7 +540,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jio.FilmLog;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jio.Filog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -547,6 +560,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FilmLog/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Filog;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -557,7 +571,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jio.FilmLog;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jio.Filog;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -9,7 +9,6 @@ import SwiftUI
 import CachedAsyncImage
 
 struct FilmDetailView: View {
-    
     let filmId: Int
     @ObservedObject private var filmDetailState = FilmDetailState()
     @ObservedObject private var filmSmiliarState = FilmListState()
@@ -65,9 +64,6 @@ struct FilmDetailListView: View {
                         Text(film.title)
                             .font(.system(size: 22, weight: .black))
                         Text("\(film.yearText) · \(film.durationText)\(film.adultText)")
-                            .onAppear {
-                                print("Adult: \(film.adult)")
-                            }
                             .font(.system(size: 16, weight: .semibold))
                         Text(film.genreText)
                             .lineLimit(1)
@@ -109,7 +105,9 @@ struct FilmDetailListView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 16) {
                                 ForEach(film.directors!){ director in
-                                    FilmCastCard(name: director.name, character: nil, profileURL: director.profileURL)
+                                    NavigationLink(destination: PersonDetailView(id: director.id)) {
+                                        FilmCastCard(name: director.name, character: nil, profileURL: director.profileURL)
+                                    }
                                 }
                             }
                             .padding(.horizontal, 16)
@@ -126,7 +124,9 @@ struct FilmDetailListView: View {
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 16) {
                                 ForEach(film.cast!.prefix(10)){ cast in
-                                    FilmCastCard(name: cast.name, character: cast.character, profileURL: cast.profileURL)
+                                    NavigationLink(destination: PersonDetailView(id: cast.id)) {
+                                        FilmCastCard(name: cast.name, character: cast.character, profileURL: cast.profileURL)
+                                    }
                                 }
                             }
                             .padding(.horizontal, 16)
@@ -256,8 +256,8 @@ struct FilmRatingCircle: View {
                 .frame(width: 41, height: 41)
                 .rotationEffect(.degrees(-90))
             
-            Text("\(Int(value))%")
-                .font(.custom(FontManager.Inconsolata.black, size: 20))
+            Text(String(format: "%.1f", value / 10))
+                .font(.system(size: 20, weight: .semibold))
                 .foregroundColor(.white)
         }
     }
@@ -299,9 +299,10 @@ struct FilmCastCard: View {
                 .multilineTextAlignment(.leading)
             }
             .frame(width: 120, height: (character != nil) ? 90 : 70)
-            .offset(y: -20)
-            .padding(.bottom, -20)
+            .offset(y: -32)
+            .padding(.bottom, -32)
         }
+        .opacity(0.9)
         .cornerRadius(4)
         .shadow(radius: 4)
     }

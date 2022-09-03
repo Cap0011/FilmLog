@@ -10,6 +10,7 @@ import Foundation
 protocol FilmDataService {
     func fetchFilms(from endpoint: FilmListEndpoint, completion: @escaping (Result<FilmResponse, FilmError>) -> ())
     func fetchFilm(id: Int, completion: @escaping (Result<FilmData, FilmError>) -> ())
+    func fetchPerson(id: Int, completion: @escaping (Result<PersonData, FilmError>) -> ())
     func fetchSimilarFilms(id: Int, completion: @escaping (Result<FilmResponse, FilmError>) -> ())
     func fetchRecommendationFilms(id: Int, completion: @escaping (Result<FilmResponse, FilmError>) -> ())
     func searchFilm(query: String, completion: @escaping (Result<FilmResponse, FilmError>) -> ())

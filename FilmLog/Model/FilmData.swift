@@ -11,7 +11,7 @@ struct FilmResponse: Decodable {
     let results: [FilmData]
 }
 
-struct FilmData : Decodable, Identifiable {
+struct FilmData: Decodable, Identifiable {
     let id: Int
     let title: String
     let backdropPath: String?
@@ -27,18 +27,18 @@ struct FilmData : Decodable, Identifiable {
     let credits: FilmCredit?
     let videos: FilmVideoResponse?
     
-    static private let yearFormatter: DateFormatter = {
+    static let yearFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy"
         return formatter
     }()
     
     var backdropURL: URL {
-        return URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath ?? "")")!
+        return URL(string: "https://image.tmdb.org/t/p/w780\(backdropPath ?? "")")!
     }
     
     var posterURL: URL {
-        return URL(string: "https://image.tmdb.org/t/p/w500\(posterPath ?? "")")!
+        return URL(string: "https://image.tmdb.org/t/p/w342\(posterPath ?? "")")!
     }
     
     var genreText: String {

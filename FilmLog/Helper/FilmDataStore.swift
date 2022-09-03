@@ -34,6 +34,16 @@ class FilmDataStore: FilmDataService {
         ], completion: completion)
     }
     
+    func fetchPerson(id: Int, completion: @escaping (Result<PersonData, FilmError>) -> ()) {
+        guard let url = URL(string: "\(baseAPIURL)/person/\(id)") else {
+            completion(.failure(.invalidEndpoint))
+            return
+        }
+        self.loadURLAndDecode(url: url, params: [
+            "append_to_response": "movie_credits,external_ids"
+        ], completion: completion)
+    }
+
     func fetchSimilarFilms(id: Int, completion: @escaping (Result<FilmResponse, FilmError>) -> ()) {
         guard let url = URL(string: "\(baseAPIURL)/movie/\(id)/similar") else {
             completion(.failure(.invalidEndpoint))

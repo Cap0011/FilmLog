@@ -18,14 +18,14 @@ struct RecommendationPostersView: View {
                     .padding(.bottom, 16)
             }
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
+                HStack(spacing: 24) {
                     ForEach(1..<films.count) { idx in
                         NavigationLink(destination: FilmDetailView(filmId: films[idx].id)) {
                             RecommendationPosterView(film: films[idx], width: (UIScreen.main.bounds.size.width - 32) / 2.5, rank: idx + 1, color: Color("Blue"), fontSize: 18)
                         }
                     }
                 }
-                .padding(.horizontal, 16)
+                .padding(.horizontal, 36)
             }
         }
     }
@@ -40,7 +40,7 @@ struct RecommendationPosterView: View {
     
     var body: some View {
         VStack {
-            ZStack(alignment: .topLeading) {
+            ZStack(alignment: .bottomLeading) {
                 CachedAsyncImage(url: film.posterURL)  { image in
                     image
                         .resizable()
@@ -55,16 +55,25 @@ struct RecommendationPosterView: View {
                 
                 if rank != nil {
                     ZStack {
-                        Capsule()
-                            .frame(width: 60, height: 30, alignment: .center)
+                        Text(String(rank!))
+                            .offset(x: 2)
+
+                        Text(String(rank!))
+                            .offset(y: -2)
+
+                        Text(String(rank!))
+                            .offset(y: 2)
+
+                        Text(String(rank!))
+                            .offset(x: -2)
+                        
+                        Text(String(rank!))
                             .foregroundColor(color)
-                            .opacity(0.7)
-                        Text(rankText(rank: rank!))
-                            .font(.custom(FontManager.rubikGlitch, size: fontSize))
-                            .foregroundColor(.white)
                     }
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 8)
+                    .foregroundColor(.white)
+                    .font(.system(size: rank == 1 ? 128 : 96, weight: .semibold))
+                    .padding(.bottom, -20)
+                    .offset(x: -30)
                 }
             }
             Text(film.title)

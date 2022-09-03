@@ -13,7 +13,6 @@ class Recommender: ObservableObject {
 
     init() {
         loadLinks()
-        load()
     }
     
     private func loadLinks() {
@@ -40,22 +39,43 @@ class Recommender: ObservableObject {
     private func userRatings() -> [Int64: Double] {
         var ratings: [Int64: Double] = [:]
         Constants.shared.films.forEach { film in
-            if film.recommend && Constants.shared.TMDBtoML[film.id!] != nil {
-                ratings[Int64(Constants.shared.TMDBtoML[film.id!]!)!] = 5.0
+            if film.id != nil {
+                if film.recommend && Constants.shared.TMDBtoML[film.id!] != nil {
+                    ratings[Int64(Constants.shared.TMDBtoML[film.id!]!)!] = 5.0
+                } else if !film.recommend && Constants.shared.TMDBtoML[film.id!] != nil {
+                    ratings[Int64(Constants.shared.TMDBtoML[film.id!]!)!] = 0.0
+                }
             }
         }
         return ratings
+    }
+    
+    private func ratedFilmIDs() -> Array<Int64> {
+        var IDs = Array<Int64>()
+        Constants.shared.films.forEach { film in
+            if Constants.shared.TMDBtoML[film.id!] != nil {
+                IDs.append(Int64(Constants.shared.TMDBtoML[film.id!]!) ?? 0)
+            }
+        }
+        return IDs
     }
     
     func load() {
         do{
             let config = MLModelConfiguration()
             let model = try MyMovieRecommender(configuration: config)
-            let input = MyMovieRecommenderInput(items: userRatings(), k: 10, restrict_: [], exclude: [])
+            let ratings = userRatings()
+            if ratings.isEmpty {
+                print("Gotcha!")
+                return
+            }
+            let input = MyMovieRecommenderInput(items: userRatings(), k: 50, restrict_: [], exclude: ratedFilmIDs())
 
             let result = try model.prediction(input: input)
             var tempFilms = [String]()
-
+            
+            result.recommendations.sort(by: { result.scores[$0] ?? 0 > result.scores[$1] ?? 0 })
+            
             for id in result.recommendations {
                 if Constants.shared.MLtoTMDB[String(id)] != nil {
                     tempFilms.append(Constants.shared.MLtoTMDB[String(id)]!)

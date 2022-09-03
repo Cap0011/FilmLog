@@ -76,6 +76,7 @@ struct MainView: View {
                                                 Button("Delete", role: .destructive) {
                                                     // Delete
                                                     deleteFilm(object: selectedFilm!)
+                                                    Constants.shared.films = films.filter{ $0.genre >= 0 }
                                                 }
                                                 Button("Cancel", role: .cancel) {
                                                     isShowingActionSheet = false
@@ -112,6 +113,10 @@ struct MainView: View {
                 })
                 .onChange(of: isShowingSheet, perform: { _ in
                     resultFilms = films.filter{ $0.genre >= 0 }
+                    Constants.shared.films = films.filter{ $0.genre >= 0 }
+                })
+                .onChange(of: isShowingEditSheet, perform: { _ in
+                    Constants.shared.films = films.filter{ $0.genre >= 0 }
                 })
                 .toolbar {
                     ToolbarItem(placement: .principal) {

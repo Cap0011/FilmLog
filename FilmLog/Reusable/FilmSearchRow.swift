@@ -6,26 +6,30 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct FilmSearchRow: View {
     var film: FilmData
-    @ObservedObject var loader = ImageLoader()
     
     var body: some View {
         VStack {
             HStack(spacing: 24) {
-                ZStack {
-                    Image(uiImage: (self.loader.image ?? UIImage(named: "NoPoster"))!)
+                CachedAsyncImage(url: film.posterURL)  { image in
+                    image
+                        .resizable()
+                } placeholder: {
+                    Image("NoPoster")
                         .resizable()
                 }
                 .aspectRatio(168/248 ,contentMode: .fit)
                 .frame(width: 80)
                 .cornerRadius(4)
+                
                 VStack(alignment: .leading, spacing: 8) {
                     Text(film.title)
-                        .font(.custom(FontManager.rubikGlitch, size: 20))
+                        .font(.system(size: 20, weight: .black))
                     Text(film.yearText)
-                        .font(.custom(FontManager.Inconsolata.regular, size: 16))
+                        .font(.system(size: 16, weight: .regular))
                 }
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.white)
@@ -33,9 +37,6 @@ struct FilmSearchRow: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
-            .onAppear {
-                loader.loadImage(with: film.posterURL)
-            }
             
             Rectangle()
                 .frame(height: 0.3)
