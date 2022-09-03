@@ -307,11 +307,3 @@ struct FilmCastCard: View {
         .shadow(radius: 4)
     }
 }
-
-struct FilmDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationView {
-            FilmDetailView(filmId: FilmData.stubbedFilm.id)
-        }
-    }
-}

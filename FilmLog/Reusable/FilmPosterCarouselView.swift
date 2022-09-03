@@ -39,9 +39,3 @@ struct FilmPosterCarouselView: View {
         }
     }
 }
-
-struct FilmPosterCarouselView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilmPosterCarouselView(title: "Now Playing", films: FilmData.stubbedFilms)
-    }
-}

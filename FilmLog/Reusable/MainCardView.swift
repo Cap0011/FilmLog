@@ -13,23 +13,24 @@ struct MainCardView: View {
     
     var body: some View {
         if film.poster != nil {
-            VStack {
+            VStack(spacing: 0) {
                 let img = Image(uiImage: UIImage(data: film.poster!)!)
                 img
                     .resizable()
-                    .aspectRatio(168/248, contentMode: .fit)
+                    .aspectRatio(2/3, contentMode: .fit)
                     .frame(width: UIScreen.main.bounds.size.width / 2 - 24)
-                    .cornerRadius(8)
+                    .scaledToFit()
+                
                 MainTextView(title: film.title!, review: film.review!, recommend: film.recommend)
-                    .offset(y: -40)
             }
-            .padding(.bottom, -40)
+            .background(.black)
+            .padding(.top, -12)
+            .cornerRadius(8)
         }
     }
 }
 
 struct MainTextView: View {
-    
     var title: String
     var review: String
     var recommend: Bool
@@ -38,20 +39,22 @@ struct MainTextView: View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 18)
                 .frame(width: 36, height: 36)
-                .foregroundColor(.white)
+                .foregroundColor(Color("LightBlue"))
                 .offset(y: -18)
             
-            VStack(spacing: 8) {
+            VStack(spacing: 4) {
                 Text(title)
-                    .font(.custom(FontManager.rubikGlitch, size: 20))
+                    .font(.system(size: 18, weight: .black))
                     .multilineTextAlignment(.center)
+                    .frame(width: UIScreen.main.bounds.size.width / 2 - 24 - 8)
                 Text(review)
-                    .font(.custom(FontManager.Inconsolata.regular, size: 16))
+                    .font(.system(size: 14, weight: .light))
                     .multilineTextAlignment(.center)
+                    .frame(width: UIScreen.main.bounds.size.width / 2 - 24 - 8)
             }
             .foregroundColor(.black)
             .padding(.bottom, 16)
-            .padding(.top, 8)
+            .padding(.top, 12)
             .padding(.horizontal, 8)
             
             if recommend {
@@ -67,6 +70,6 @@ struct MainTextView: View {
             }
         }
         .frame(width: UIScreen.main.bounds.size.width / 2 - 24)
-        .background(RoundedRectangle(cornerRadius: 8).foregroundColor(.white))
+        .background(Color("LightBlue"))
     }
 }

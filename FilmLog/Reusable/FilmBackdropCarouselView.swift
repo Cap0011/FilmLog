@@ -36,9 +36,3 @@ struct FilmBackdropCarouselView: View {
         .padding(.bottom, 16)
     }
 }
-
-struct FilmBackdropCarouselView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilmBackdropCarouselView(title: "Latest", films: FilmData.stubbedFilms)
-    }
-}

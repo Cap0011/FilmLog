@@ -41,7 +41,7 @@ struct RecommendationView: View {
                             }
                     } else {
                         if recommendations.filmIDs.isEmpty {
-                            Text("Leave reviews to get personalised film recommendations!")
+                            Text("Leave more reviews to get personalised film recommendations!")
                                 .foregroundColor(.white)
                                 .multilineTextAlignment(.center)
                         } else {

@@ -26,11 +26,9 @@ struct LoadingView: View {
                     Spacer()
                     VStack(spacing: 4) {
                         Text(error!.localizedDescription)
-                            .font(.custom(FontManager.Inconsolata.regular, size: 16))
                         if self.retryAction != nil {
                             Button(action: self.retryAction!) {
                                 Text("Retry")
-                                    .font(.custom(FontManager.Inconsolata.regular, size: 16))
                             }
                             .foregroundColor(Color(UIColor.systemBlue))
                             .buttonStyle(PlainButtonStyle())

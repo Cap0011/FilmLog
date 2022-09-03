@@ -19,12 +19,12 @@ struct TotalView: View {
         TabView {
             MainView()
                 .tabItem {
-                    Image(systemName: "film.fill")
+                    Image(systemName: "eye")
                     Text("Watched")
                 }
             FilmListView()
                 .tabItem {
-                    Image(systemName: "list.and.film")
+                    Image(systemName: "film")
                     Text("Explore")
                 }
             RecommendationView()

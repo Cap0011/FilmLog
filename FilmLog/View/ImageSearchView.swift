@@ -10,7 +10,6 @@ import SwiftUI
 struct ImageSearchView: View {
     
     @ObservedObject var filmSearchState = FilmSearchState()
-    @ObservedObject var imageLoader: ImageLoader
     @Binding var isShowingSheet: Bool
     @Binding var selectedURL: URL?
     @Binding var title: String
@@ -37,7 +36,6 @@ struct ImageSearchView: View {
                                     // Pass posterURL and film title, close this sheet
                                     selectedURL = film.posterURL
                                     title = film.title
-                                    imageLoader.image = nil
                                     id = String(film.id)
                                     self.isShowingSheet = false
                                 }

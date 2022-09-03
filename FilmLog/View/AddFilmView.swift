@@ -5,8 +5,8 @@
 //  Created by Jiyoung Park on 2022/04/28.
 //
 
+import CachedAsyncImage
 import SwiftUI
-import AlertToast
 
 struct AddFilmView: View {
     
@@ -15,14 +15,10 @@ struct AddFilmView: View {
     @Binding var isShowingSheet: Bool
     @State private var showErrorToast = false
     
-    @State private var imagePickerPresented = false
-    @State private var selectedImage: UIImage?
+    @State private var selectedImage: Image?
     @State private var selectedURL: URL?
-    @ObservedObject var imageLoader = ImageLoader()
-    @State private var isShowingActionSheet: Bool = false
     @State private var isShowingSearchSheet: Bool = false
     
-    @State private var filmImage: Image?
     @State private var genre: Int = 1
     @State private var title: String = ""
     @State private var review: String = ""
@@ -34,39 +30,28 @@ struct AddFilmView: View {
             ZStack(alignment: .top) {
                 Color("Blue").ignoresSafeArea()
                 VStack {
-                    let image = filmImage ?? Image("White")
-                    image
-                        .resizable()
-                        .aspectRatio(168/248 ,contentMode: .fit)
-                        .frame(width: UIScreen.main.bounds.size.width / 2 - 24)
-                        .cornerRadius(8)
-                        .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2)
-                        .padding(.vertical, 16)
-                        .confirmationDialog("How would you like to pick the film poster?", isPresented: $isShowingActionSheet, titleVisibility: .visible) {
-                            Button("Choose from gallery", role: .none) {
-                                // Open ImagePicker
-                                self.imageLoader.image = nil
-                                self.selectedURL = nil
-                                imagePickerPresented.toggle()
+                    CachedAsyncImage(url: self.selectedURL)  { image in
+                        image
+                            .resizable()
+                            .onAppear {
+                                selectedImage = image
                             }
-                            Button("Look up", role: .none) {
-                                // Look up film from tmdb
-                                isShowingSearchSheet.toggle()
-                            }
-                            Button("Cancel", role: .cancel) {
-                                isShowingActionSheet = false
-                            }
-                        }
-                        .onTapGesture {
-                            isShowingActionSheet.toggle()
-                        }
-                        .sheet(isPresented: $imagePickerPresented,
-                               onDismiss: loadImage,
-                               content: { ImagePicker(image: $selectedImage) })
-                        .sheet(isPresented: $isShowingSearchSheet,
-                               onDismiss: loadImage) {
-                            ImageSearchView(imageLoader: imageLoader, isShowingSheet: $isShowingSearchSheet, selectedURL: $selectedURL, title: $title, id: $id)
-                        }
+                    } placeholder: {
+                        Image("White")
+                            .resizable()
+                    }
+                    .aspectRatio(2/3, contentMode: .fit)
+                    .frame(width: UIScreen.main.bounds.size.width / 2 - 24)
+                    .cornerRadius(8)
+                    .shadow(color: .black.opacity(0.1), radius: 15, x: 0, y: 2)
+                    .padding(.vertical, 16)
+                    .onTapGesture {
+                        // Look up film from tmdb
+                        isShowingSearchSheet.toggle()
+                    }
+                    .sheet(isPresented: $isShowingSearchSheet) {
+                        ImageSearchView(isShowingSheet: $isShowingSearchSheet, selectedURL: $selectedURL, title: $title, id: $id)
+                    }
                     
                     GenreScrollView(selected: $genre, isAllIncluded: false)
                         .padding(.bottom, 16)
@@ -75,7 +60,7 @@ struct AddFilmView: View {
                         .padding(.leading, 16)
                         .foregroundColor(.white)
                         .frame(height: 40)
-                        .font(.custom(FontManager.rubikGlitch, size: 17))
+                        .font(.system(size: 16, weight: .black))
                         .background(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 1).foregroundColor(.white))
                         .padding(.horizontal, 16)
                         .padding(.bottom, 8)
@@ -96,10 +81,10 @@ struct AddFilmView: View {
                             .background(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 1).foregroundColor(.white))
                             .padding(.horizontal, 16)
                     }
-                    .font(.custom(FontManager.Inconsolata.regular, size: 17))
-   
+                    .font(.system(size: 16, weight: .light))
+                    
                     VStack(spacing: 24) {
-                        Text("Would you watch it again?")
+                        Text("Did you enjoy watching it?")
                             .font(.custom(FontManager.Inconsolata.black, size: 22))
                             .foregroundColor(.white)
                         
@@ -118,7 +103,7 @@ struct AddFilmView: View {
                             VStack(spacing: 5) {
                                 Image(systemName: "heart.slash")
                                     .font(.system(size: 40))
-                                Text("I'm good")
+                                Text("Not really")
                                     .font(.custom(FontManager.Inconsolata.regular, size: 17))
                             }
                             .foregroundColor(recommend ? .white : Color("Red"))
@@ -130,9 +115,7 @@ struct AddFilmView: View {
                     .padding(.top, 24)
                 }
             }
-            .toast(isPresenting: $showErrorToast, alert: {
-                AlertToast(displayMode: .banner(.pop), type: .error(Color("Red")), title: "Please fill in all the required fields.")
-            })
+            .toast(message: "Please choose a film", isShowing: $showErrorToast, duration: Toast.short)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -145,32 +128,20 @@ struct AddFilmView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         // If incomplete -> toast
-                        if filmImage == nil || title == "" {
-                            showErrorToast.toggle()
+                        if title.isEmpty {
+                            showErrorToast = true
                         }
                         // If complete -> save
                         else {
                             self.isShowingSheet = false
-                            addFilm(title: title, review: review, genre: genre, recommend: recommend, poster: selectedImage!)
+                            addFilm(title: title, review: review, genre: genre, recommend: recommend, poster: selectedImage ?? Image("NoPoster"))
                         }
                     } label: {
-                        Text("Save").bold()
+                        Text("Save")
+                            .font(.system(size: 17, weight: .heavy))
                     }
                 }
             }
-        }
-    }
-    
-    private func loadImage() {
-        if self.selectedURL != nil {
-            Task {
-                await self.imageLoader.loadImageforPoster(with: selectedURL!)
-                selectedImage = self.imageLoader.image ?? UIImage(named: "NoPoster")
-                filmImage = Image(uiImage: selectedImage!)
-            }
-        } else {
-            guard let selectedImage = selectedImage else { return }
-            filmImage = Image(uiImage: selectedImage)
         }
     }
     
@@ -183,16 +154,15 @@ struct AddFilmView: View {
         }
     }
     
-    private func addFilm(title: String, review: String, genre: Int, recommend: Bool, poster: UIImage) {
+    private func addFilm(title: String, review: String, genre: Int, recommend: Bool, poster: Image) {
         let newFilm = Film(context: viewContext)
         newFilm.title = title
         newFilm.recommend = recommend
         newFilm.review = review
         newFilm.genre = Int64(genre)
-        newFilm.poster = poster.pngData()
+        newFilm.poster = poster.snapshot().pngData()
         newFilm.id = id
         
         saveContext()
     }
-    
 }

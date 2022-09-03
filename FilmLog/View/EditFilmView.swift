@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import AlertToast
 
 struct EditFilmView: View {
     
@@ -44,7 +43,7 @@ struct EditFilmView: View {
                         .padding(.leading, 16)
                         .foregroundColor(.white)
                         .frame(height: 40)
-                        .font(.custom(FontManager.rubikGlitch, size: 17))
+                        .font(.system(size: 16, weight: .black))
                         .background(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 1).foregroundColor(.white))
                         .padding(.horizontal, 16)
                         .padding(.bottom, 8)
@@ -66,7 +65,7 @@ struct EditFilmView: View {
                             .background(RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 1).foregroundColor(.white))
                             .padding(.horizontal, 16)
                     }
-                    .font(.custom(FontManager.Inconsolata.regular, size: 17))
+                    .font(.system(size: 16, weight: .light))
    
                     VStack(spacing: 24) {
                         Text("Would you watch it again?")
@@ -100,9 +99,7 @@ struct EditFilmView: View {
                     .padding(.top, 24)
                 }
             }
-            .toast(isPresenting: $showErrorToast, alert: {
-                AlertToast(displayMode: .banner(.pop), type: .error(Color("Red")), title: "Please fill in all the required fields.")
-            })
+            .toast(message: "Please choose a film", isShowing: $showErrorToast, duration: Toast.short)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -115,7 +112,7 @@ struct EditFilmView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         // If incomplete -> toast
-                        if filmImage == nil || title == "" {
+                        if title.isEmpty {
                             showErrorToast.toggle()
                         }
                         // If complete -> save
@@ -124,7 +121,8 @@ struct EditFilmView: View {
                             editFilm(review: review, recommend: recommend)
                         }
                     } label: {
-                        Text("Done").bold()
+                        Text("Done")
+                            .font(.system(size: 17, weight: .heavy))
                     }
                 }
             }

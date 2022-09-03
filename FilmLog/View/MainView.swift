@@ -21,7 +21,8 @@ struct MainView: View {
     @State private var isShowingSheet = false
     @State private var isShowingEditSheet = false
     @State private var isShowingActionSheet = false
-    
+    @State private var isShowingDetailSheet = false
+
     @State var searchTitle = ""
     @State var isSearching = false
     
@@ -44,6 +45,10 @@ struct MainView: View {
                                         MainCardView(film: resultFilms[idx])
                                             .padding(.leading, 16)
                                             .confirmationDialog(selectedFilm?.title ?? "", isPresented: $isShowingActionSheet, titleVisibility: .visible) {
+                                                Button("See film info", role: .none) {
+                                                    // Open Detail View
+                                                    isShowingDetailSheet.toggle()
+                                                }
                                                 Button("Edit", role: .none) {
                                                     // Open Edit Sheet
                                                     isShowingEditSheet.toggle()
@@ -69,6 +74,10 @@ struct MainView: View {
                                         MainCardView(film: resultFilms[idx])
                                             .padding(.trailing, 16)
                                             .confirmationDialog(selectedFilm?.title ?? "", isPresented: $isShowingActionSheet, titleVisibility: .visible) {
+                                                Button("See film info", role: .none) {
+                                                    // Open Detail View
+                                                    isShowingDetailSheet.toggle()
+                                                }
                                                 Button("Edit", role: .none) {
                                                     // Open Edit Sheet
                                                     isShowingEditSheet.toggle()
@@ -141,6 +150,13 @@ struct MainView: View {
                 .sheet(isPresented: $isShowingEditSheet) {
                     EditFilmView(isShowingSheet: self.$isShowingEditSheet, film: $selectedFilm)
                 }
+                .sheet(isPresented: $isShowingDetailSheet) {
+                    if selectedFilm != nil {
+                        NavigationView {
+                            FilmDetailSheetView(filmId: Int(selectedFilm!.id!) ?? 0, isShowingSheet: $isShowingDetailSheet)
+                        }
+                    }
+                }
             }
             .navigationBarTitleDisplayMode(.inline)
         }
@@ -158,11 +174,5 @@ struct MainView: View {
     private func deleteFilm(object: Film) {
         viewContext.delete(object)
         saveContext()
-    }
-}
-
-extension UIApplication {
-    func dismissKeyboard() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
