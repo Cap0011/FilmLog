@@ -20,13 +20,22 @@ struct RecommendationView: View {
             ZStack(alignment: .top) {
                 Color("Blue").ignoresSafeArea()
                 VStack(spacing: 16) {
-                    ZStack {
-                        Text("Films you might love")
-                            .foregroundColor(Color("Red"))
-                            .offset(x: 3)
+                    HStack(spacing: 8) {
+                        ZStack {
+                            Text("Films you might love")
+                                .foregroundColor(Color("Red"))
+                                .offset(x: 3)
+                            
+                            Text("Films you might love")
+                                .foregroundColor(.white)
+                        }
                         
-                        Text("Films you might love")
+                        Image(systemName: "arrow.clockwise")
                             .foregroundColor(.white)
+                            .onTapGesture {
+                                recommendations.load()
+                                recommendationsState.loadFilms(with: recommendations.filmIDs)
+                            }
                     }
                     .font(.system(size: 28, weight: .black))
                     .padding(.top, 64)
@@ -54,9 +63,8 @@ struct RecommendationView: View {
                 .ignoresSafeArea()
             }
             .ignoresSafeArea()
+            .navigationBarHidden(true)
         }
-        .navigationBarHidden(true)
-        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             if !isLoaded {
                 recommendations.load()

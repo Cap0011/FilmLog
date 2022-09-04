@@ -65,10 +65,7 @@ class Recommender: ObservableObject {
             let config = MLModelConfiguration()
             let model = try MyMovieRecommender(configuration: config)
             let ratings = userRatings()
-            if ratings.isEmpty {
-                print("Gotcha!")
-                return
-            }
+            if ratings.isEmpty { return }
             let input = MyMovieRecommenderInput(items: userRatings(), k: 50, restrict_: [], exclude: ratedFilmIDs())
 
             let result = try model.prediction(input: input)

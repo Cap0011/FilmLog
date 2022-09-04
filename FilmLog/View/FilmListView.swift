@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct FilmListView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.title)
+    ])
+    
+    private var films: FetchedResults<Film>
     
     @ObservedObject private var nowPlayingState = FilmListState()
     @ObservedObject private var upcomingState = FilmListState()
@@ -93,6 +99,8 @@ struct FilmListView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .onAppear {
+            Constants.shared.films = films.filter{ $0.genre >= 0 }
+            
             self.nowPlayingState.loadFilms(with: .nowPlaying)
             self.upcomingState.loadFilms(with: .upcoming)
             self.topRatedState.loadFilms(with: .topRated)

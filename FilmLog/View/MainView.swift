@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct MainView: View {
-    
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.title)

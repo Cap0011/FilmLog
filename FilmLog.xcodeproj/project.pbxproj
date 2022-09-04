@@ -185,7 +185,6 @@
 				C76C922728BA569600703CCD /* MyMovieRecommender.mlmodel */,
 				C76C91F228A59DC300703CCD /* Genres.swift */,
 				C7703BCD282102BF0046D608 /* FilmData.swift */,
-				C76C922928BA7E1A00703CCD /* Recommender.swift */,
 				C76C923A28BE901400703CCD /* PersonData.swift */,
 			);
 			path = Model;
@@ -238,6 +237,7 @@
 				C7703BCF282102CD0046D608 /* FilmDataService.swift */,
 				C7703BD1282107EA0046D608 /* FilmDataStore.swift */,
 				C7703BD3282109C10046D608 /* Utils.swift */,
+				C76C922928BA7E1A00703CCD /* Recommender.swift */,
 				C7703BD5282117490046D608 /* Extension.swift */,
 				C7703BEB28216B460046D608 /* FilmListState.swift */,
 				C7703BF52821A1BB0046D608 /* FilmDetailState.swift */,
