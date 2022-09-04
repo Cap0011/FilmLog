@@ -14,6 +14,9 @@ struct FilmDetailView: View {
     @ObservedObject private var filmSmiliarState = FilmListState()
     @ObservedObject private var filmRecommendationState = FilmListState()
     
+    @State var isShowingAddToast = false
+    @State var isShowingRemoveToast = false
+    
     var body: some View {
         ZStack {
             Color("Blue").ignoresSafeArea()
@@ -23,11 +26,13 @@ struct FilmDetailView: View {
                 }
                 
                 if filmDetailState.film != nil {
-                    FilmDetailListView(film: filmDetailState.film!, similarFilms: filmSmiliarState.films, recommendationFilms: filmRecommendationState.films)
+                    FilmDetailListView(film: filmDetailState.film!, similarFilms: filmSmiliarState.films, recommendationFilms: filmRecommendationState.films, isShowingAddToast: $isShowingAddToast, isShowingRemoveToast: $isShowingRemoveToast)
                 }
             }
             .ignoresSafeArea()
         }
+        .toast(message: "Added to your watch list", isShowing: $isShowingAddToast, duration: Toast.short)
+        .toast(message: "Removed from your watch list", isShowing: $isShowingRemoveToast, duration: Toast.short)
         .onAppear {
             self.filmDetailState.loadFilm(id: self.filmId)
             self.filmSmiliarState.loadSimilarFilms(id: self.filmId)
@@ -44,7 +49,11 @@ struct FilmDetailListView: View {
     @State private var selectedTrailer: FilmVideo?
     
     @State var isShowingSheet = false
+    @Binding var isShowingAddToast: Bool
+    @Binding var isShowingRemoveToast: Bool
     
+    @State var isAlreadyOnList = false
+        
     var body: some View {
         ZStack(alignment: .topLeading) {
             Color("Blue").ignoresSafeArea()
@@ -74,14 +83,24 @@ struct FilmDetailListView: View {
                         }
                         
                         HStack(spacing: 12) {
-                            Image(systemName: "text.badge.plus")
-                                .onTapGesture {
-                                    // TODO: Add to watch list
-                                }
+                            if !isAlreadyOnList {
+                                Image(systemName: "text.badge.plus")
+                                    .onTapGesture {
+                                        self.saveData(filmID: film.id, posterURL: film.posterURL)
+                                        isAlreadyOnList.toggle()
+                                        isShowingAddToast = true
+                                    }
+                            } else {
+                                Image(systemName: "text.badge.checkmark")
+                                    .onTapGesture {
+                                        self.removeData(filmID: film.id)
+                                        isAlreadyOnList.toggle()
+                                        isShowingRemoveToast = true
+                                    }
+                            }
                             Image(systemName: "plus.bubble.fill")
                                 .offset(y: 2)
                                 .onTapGesture {
-                                    // TODO: Leave a review
                                     isShowingSheet.toggle()
                                 }
                         }
@@ -205,6 +224,29 @@ struct FilmDetailListView: View {
             .ignoresSafeArea()
             .padding(.bottom, 100)
         }
+        .onAppear {
+            fetchListState(filmID: film.id)
+        }
+    }
+    
+    private func saveData(filmID: Int, posterURL: URL) {
+        var savedDictionary: [String: String] = UserDefaults.standard.dictionary(forKey: "ToWatchFilms") as? [String: String] ?? [:]
+        savedDictionary[String(filmID)] = posterURL.absoluteString
+        UserDefaults.standard.set(savedDictionary, forKey: "ToWatchFilms")
+    }
+    
+    private func removeData(filmID: Int) {
+        var savedDictionary: [String: String] = UserDefaults.standard.dictionary(forKey: "ToWatchFilms") as? [String: String] ?? [:]
+        savedDictionary[String(filmID)] = nil
+        UserDefaults.standard.set(savedDictionary, forKey: "ToWatchFilms")
+    }
+    
+    private func fetchListState(filmID: Int) {
+        let savedDictionary: [String: String] = UserDefaults.standard.dictionary(forKey: "ToWatchFilms") as? [String: String] ?? [:]
+        let result = savedDictionary[String(filmID)] != nil
+        
+        if result { isAlreadyOnList = true }
+        else { isAlreadyOnList = false }
     }
 }
 
