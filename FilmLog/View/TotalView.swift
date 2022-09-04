@@ -17,15 +17,20 @@ struct TotalView: View {
     
     var body: some View {
         TabView {
-            MainView()
-                .tabItem {
-                    Image(systemName: "eye")
-                    Text("Watched")
-                }
             FilmListView()
                 .tabItem {
-                    Image(systemName: "film")
+                    Image(systemName: "doc.text.magnifyingglass")
                     Text("Explore")
+                }
+            MainView()
+                .tabItem {
+                    Image(systemName: "film")
+                    Text("Watched")
+                }
+            WatchListView()
+                .tabItem {
+                    Image(systemName: "list.and.film")
+                    Text("To Watch")
                 }
             RecommendationView()
                 .tabItem {

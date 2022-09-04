@@ -37,12 +37,13 @@ struct FilmDetailView: View {
 }
 
 struct FilmDetailListView: View {
-    
     let film: FilmData
     let similarFilms: [FilmData]?
     let recommendationFilms: [FilmData]?
     
     @State private var selectedTrailer: FilmVideo?
+    
+    @State var isShowingSheet = false
     
     var body: some View {
         ZStack(alignment: .topLeading) {
@@ -60,26 +61,32 @@ struct FilmDetailListView: View {
                         .padding(.bottom, -50)
                         .padding(.leading, 16)
                         .padding(.trailing, 8)
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(film.title)
-                            .font(.system(size: 22, weight: .black))
-                        Text("\(film.yearText) · \(film.durationText)\(film.adultText)")
-                            .font(.system(size: 16, weight: .semibold))
-                        Text(film.genreText)
-                            .lineLimit(1)
-                            .font(.system(size: 16, weight: .light))
-                            .padding(.top, -6)
-                        HStack(spacing: 8) {
-                            Image(systemName: "plus.circle.fill")
-                                .onTapGesture {
-                                    // TODO: Leave a review
-                                }
-                            Image(systemName: "bookmark.circle.fill")
+                    VStack(alignment: .trailing, spacing: 8) {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(film.title)
+                                .font(.system(size: 22, weight: .black))
+                            Text("\(film.yearText) · \(film.durationText)\(film.adultText)")
+                                .font(.system(size: 16, weight: .semibold))
+                            Text(film.genreText)
+                                .lineLimit(1)
+                                .font(.system(size: 16, weight: .light))
+                                .padding(.top, -6)
+                        }
+                        
+                        HStack(spacing: 12) {
+                            Image(systemName: "text.badge.plus")
                                 .onTapGesture {
                                     // TODO: Add to watch list
                                 }
+                            Image(systemName: "plus.bubble.fill")
+                                .offset(y: 2)
+                                .onTapGesture {
+                                    // TODO: Leave a review
+                                    isShowingSheet.toggle()
+                                }
                         }
-                        .font(.system(size: 30))
+                        .padding(.top, 8)
+                        .font(.system(size: 22))
                         .foregroundColor(Color("Red"))
                     }
                     .padding(.trailing, 8)
@@ -191,6 +198,9 @@ struct FilmDetailListView: View {
                     }
                 }
             }
+            .sheet(isPresented: $isShowingSheet, content: {
+                AddFilmView(isShowingSheet: $isShowingSheet, selectedURL: film.posterURL, title: film.title, id: String(film.id))
+            })
             .lineSpacing(5)
             .ignoresSafeArea()
             .padding(.bottom, 100)

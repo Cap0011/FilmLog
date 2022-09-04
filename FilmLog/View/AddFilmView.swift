@@ -9,21 +9,21 @@ import CachedAsyncImage
 import SwiftUI
 
 struct AddFilmView: View {
-    
     @Environment(\.managedObjectContext) private var viewContext
     
     @Binding var isShowingSheet: Bool
+    @State var selectedURL: URL?
+    @State var title: String = ""
+    @State var id: String = ""
+
     @State private var showErrorToast = false
     
     @State private var selectedImage: Image?
-    @State private var selectedURL: URL?
     @State private var isShowingSearchSheet: Bool = false
     
     @State private var genre: Int = 1
-    @State private var title: String = ""
     @State private var review: String = ""
     @State private var recommend: Bool = true
-    @State private var id: String = ""
     
     var body: some View {
         NavigationView {
