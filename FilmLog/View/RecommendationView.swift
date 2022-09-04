@@ -37,7 +37,7 @@ struct RecommendationView: View {
                                 recommendationsState.loadFilms(with: recommendations.filmIDs)
                             }
                     }
-                    .font(.system(size: 28, weight: .black))
+                    .font(.system(size: 24, weight: .black))
                     .padding(.top, 64)
                     .padding(.horizontal, 16)
                     .padding(.bottom, 4)
